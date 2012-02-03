@@ -1,0 +1,9 @@
+#!/bin/bash
+
+emacs ~/Dropbox/org/kmels.org &
+google-chrome "mail.kmels.net"  &
+clementine &
+skype &
+xchat &
+
+exec ~/.cabal/bin/xmonad
