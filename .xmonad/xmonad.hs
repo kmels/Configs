@@ -45,7 +45,7 @@ myBorderWidth   = 1
 -- ("right alt"), which does not conflict with emacs keybindings. The
 -- "windows key" is usually mod4Mask.
 --
-myModMask       = mod4Mask
+myModMask       = mod1Mask
  
 -- NOTE: from 0.9.1 on numlock mask is set automatically. The numlockMask
 -- setting should be removed from configs.
@@ -153,9 +153,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         
       -- Take screenshot and open its folder right away 
     , ((modm  , xK_apostrophe), spawn "scrot -e 'mv $f ~/Desktop' && nautilus ~/Desktop" ) 
-            
+
       -- favorite browser
-    , ((modm              , xK_b), spawn "google-chrome")
+    , ((modm              , xK_b), spawn "conkeror")
       
       -- compile & run form-shifter
     , ((modm              , xK_F11), spawn "/home/kmels/code/uvg/graficas/form-shifter/src/make" )
