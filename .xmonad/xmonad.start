@@ -1,11 +1,15 @@
 #!/bin/bash
 
+#invert Super_L and Alt_L
 xmodmap -e 'keycode 133=0xffe9' &
 xmodmap -e 'keycode  64=0xffeb' &
-emacs ~/Dropbox/org/kmels.org &
-conkeror "mail.kmels.net"  &
-clementine &
-skype &
-xchat &
 
-exec ~/.cabal/bin/xmonad
+~/.cabal/bin/xmonad &
+
+emacs ~/Dropbox/org/kmels.org &
+conkeror "mail.kmels.net" &
+clementine &
+gnome-terminal &
+bitlbee -c ~/.bitlbee.conf &
+xchat & 
+skype &

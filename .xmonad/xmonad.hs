@@ -75,17 +75,13 @@ myModMask       = mod1Mask
 -- workspace name. The number of workspaces is determined by the length
 -- of this list.
 --
--- A tagging example:
---
--- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
---
-myWorkspaces    = ["mail","browser","3","4","5","6","7","8","music"]
+myWorkspaces    = ["maintask","browser","code","shell","windows","6","translate","mail","music"]
  
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor = "#ff0000"
- 
+
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -157,9 +153,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- favorite browser
     , ((modm              , xK_b), spawn "conkeror")
       
-      -- compile & run form-shifter
-    , ((modm              , xK_F11), spawn "/home/kmels/code/uvg/graficas/form-shifter/src/make" )
-    , ((modm              , xK_F12), spawn "/home/kmels/code/uvg/graficas/form-shifter/src/form-shifter" )
+      -- favorite editor
+    , ((modm              , xK_e), spawn "emacs")
             
       --Search
     , ((modm, xK_s), SM.submap $ searchEngineMap $ S.promptSearch P.defaultXPConfig)      
@@ -292,13 +287,22 @@ myLayout = tiled ||| Mirror tiled ||| Full
 --
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
---    
-myManageHook = composeOne [
-  isKDETrayWindow -?> doIgnore,
-  transience,
-  isFullscreen -?> doFullFloat,
-  resource =? "stalonetray" -?> doIgnore
+--
+myManageHook = composeAll [
+  manageHook gnomeConfig,
+  className =? "Clementine" --> doShift "music",
+  className =? "Xchat" --> doShift "talk",
+  className =? "Emacs" --> doShift "code",
+  className =? "Skype" --> doShift "talk",  
+  className =? "gnome-terminal" --> doShift "shell"
   ]
+               
+--myManageHook = composeOne [
+  --isKDETrayWindow -?> doIgnore,
+  --transience,
+  --isFullscreen -?> doFullFloat,
+  --resource =? "stalonetray" -?> doIgnore  
+--  ]
 ------------------------------------------------------------------------
 -- Event handling
  
@@ -371,11 +375,11 @@ kmelsConfig = gnomeConfig{
   focusedBorderColor = myFocusedBorderColor,
   
   -- key bindings
-  keys               = myKeys
+  keys               = myKeys,
   --mouseBindings      = myMouseBindings,
   
   -- hooks, layouts
   --           layoutHook         = myLayout
-                --manageHook         = myManageHook
+  manageHook         = myManageHook
   --handleEventHook    = myEventHook,
 }
