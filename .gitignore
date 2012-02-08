@@ -4,7 +4,12 @@ code
 Dropbox
 Downloads
 Pictures
+Podcasts
 tmp
+VirtualBox VMs
+
+#binaries
+*.elc
 
 #config folders
 .ICEauthority
@@ -12,12 +17,16 @@ tmp
 .VirtualBox
 .adobe
 .cabal
+.conkeror.mozdev.org/
 .cache
 .compiz
 .config
+.darcs/
 .dbus
 .dropbox-dist
 .dropbox
+.eshell/
+.evolution/
 .ivy2
 .fontconfig
 .gconf
@@ -27,6 +36,7 @@ tmp
 .gstreamer-0.10
 .local
 .macromedia
+.mission-control/
 .mozilla
 .mysqlgui
 .netx
@@ -40,6 +50,7 @@ tmp
 
 #files
 .bash*
+.calc_history
 .dmenu_cache
 .esd_auth
 .gksu.lock
