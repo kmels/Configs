@@ -292,7 +292,7 @@ myManageHook = composeAll [
   manageHook gnomeConfig,
   className =? "Clementine" --> doShift "music",
   className =? "Xchat" --> doShift "talk",
-  className =? "Skype" --> doShift "talk",  
+  className =? "Skype" --> doShift "talk"
   ]
                
 --myManageHook = composeOne [
