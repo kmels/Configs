@@ -7,3 +7,6 @@ modifiers.M = new modifier(
 
 /* German */
 define_webjump("leo", "http://pda.leo.org/?lp=ende&lang=de&searchLoc=0&cmpType=relaxed&relink=on&sectHdr=off&spellToler=std&search=%s");
+
+/* Hoogle */
+define_webjump("hoogle", "http://www.haskell.org/hoogle/?hoogle=%s");
