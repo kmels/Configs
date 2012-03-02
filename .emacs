@@ -6,8 +6,10 @@
 (set-default-font "-unknown-Inconsolata-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
 
 ; avoid backup (~) temp file
+(setq make-backup-files nil)
 
-(setq make-backup-files nil) 
+; enable clipboard
+(setq x-select-enable-clipboard t )
 
 ;; ***************************************
 ;; color-theme
@@ -124,12 +126,11 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(org-agenda-files nil))
+ '(org-agenda-files (quote ("~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org"))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
-
 

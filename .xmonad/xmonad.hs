@@ -151,7 +151,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm  , xK_apostrophe), spawn "scrot -e 'mv $f ~/Desktop' && nautilus ~/Desktop" ) 
 
       -- favorite browser
-    , ((modm              , xK_b), spawn "conkeror")
+    , ((modm              , xK_b), spawn "~/bin/conkeror")
       
       -- favorite editor
     , ((modm              , xK_e), spawn "emacs")

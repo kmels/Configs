@@ -10,3 +10,10 @@ define_webjump("leo", "http://pda.leo.org/?lp=ende&lang=de&searchLoc=0&cmpType=r
 
 /* Hoogle */
 define_webjump("hoogle", "http://www.haskell.org/hoogle/?hoogle=%s");
+
+/* Sessions */ 
+require("session.js"); 
+session_auto_save_auto_load = true;
+
+/* gmail-mode */
+require("gmail.js");
