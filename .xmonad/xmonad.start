@@ -4,11 +4,12 @@
 xmodmap -e 'keycode 133=0xffe9' &
 xmodmap -e 'keycode  64=0xffeb' &
 
+#start favorite WM
 ~/.cabal/bin/xmonad &
 
+#start favorite programs
 emacs ~/Dropbox/org/kmels.org &
-google-chrome "mail.kmels.net" & #gmail shortcuts interfere with conkeror's
-conkeror "reddit.com" & #the home page of the internet
+conkeror "mail.kmels.net" &
 clementine &
 gnome-terminal &
 bitlbee -c ~/.bitlbee.conf &
