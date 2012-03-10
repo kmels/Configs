@@ -17,3 +17,6 @@ session_auto_save_auto_load = true;
 
 /* gmail-mode */
 require("gmail.js");
+
+/* Hackage */
+define_webjump("hackage","http://google.com/search?as_sitesearch=hackage.haskell.org%2Fpackage&as_q=%s")
