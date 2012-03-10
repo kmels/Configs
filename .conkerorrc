@@ -20,3 +20,21 @@ require("gmail.js");
 
 /* Hackage */
 define_webjump("hackage","http://google.com/search?as_sitesearch=hackage.haskell.org%2Fpackage&as_q=%s")
+
+/* goto file://~/code/kmels.net */
+define_webjump("hackage","http://google.com/search?as_sitesearch=hackage.haskell.org%2Fpackage&as_q=%s")
+
+/* shortcut commands, e.g.
+M-x kmels-home => goto(file://~/code/kmels.net/_site) 
+*/
+
+var kmels_net_home = "file:///home/kmels/code/kmels.net/_site"
+function goto_url(document,url) {
+    document.location.href = url;
+}
+
+interactive("kmels-home","go to file hakyll recent build",function (I) { goto_url(I.buffer.document,kmels_net_home);})
+
+interactive("mail","go to mail",function (I) { goto_url(I.buffer.document,"http://mail.kmels.net");})
+
+interactive("bank","go to onlinebank",function (I) { goto_url(I.buffer.document,"https://finanzportal.fiducia.de/p14pepe/entry?rzid=XC&rzbk=0838");})
