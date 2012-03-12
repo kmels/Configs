@@ -5,6 +5,9 @@ modifiers.M = new modifier(
     function (event) { return event.metaKey; },
     function (event) { event.metaKey = true; });
 
+/****************************************
+*               Webjumps begin
+*****************************************/
 /* German */
 define_webjump("leo", "http://pda.leo.org/?lp=ende&lang=de&searchLoc=0&cmpType=relaxed&relink=on&sectHdr=off&spellToler=std&search=%s");
 
@@ -20,6 +23,13 @@ require("gmail.js");
 
 /* Hackage */
 define_webjump("hackage","http://google.com/search?as_sitesearch=hackage.haskell.org%2Fpackage&as_q=%s")
+
+/* Wordnik */
+define_webjump("wordnik","http://www.wordnik.com/words/%s")
+
+/****************************************
+*               Webjumps end
+****************************************/
 
 /* goto file://~/code/kmels.net */
 define_webjump("hackage","http://google.com/search?as_sitesearch=hackage.haskell.org%2Fpackage&as_q=%s")
@@ -38,3 +48,4 @@ interactive("kmels-home","go to file hakyll recent build",function (I) { goto_ur
 interactive("mail","go to mail",function (I) { goto_url(I.buffer.document,"http://mail.kmels.net");})
 
 interactive("bank","go to onlinebank",function (I) { goto_url(I.buffer.document,"https://finanzportal.fiducia.de/p14pepe/entry?rzid=XC&rzbk=0838");})
+
