@@ -11,6 +11,8 @@ modifiers.M = new modifier(
 /* German */
 define_webjump("leo", "http://pda.leo.org/?lp=ende&lang=de&searchLoc=0&cmpType=relaxed&relink=on&sectHdr=off&spellToler=std&search=%s");
 
+define_webjump("dict.cc", "http://www.dict.cc/?s=%s");
+
 /* Hoogle */
 define_webjump("hoogle", "http://www.haskell.org/hoogle/?hoogle=%s");
 
@@ -26,6 +28,11 @@ define_webjump("hackage","http://google.com/search?as_sitesearch=hackage.haskell
 
 /* Wordnik */
 define_webjump("wordnik","http://www.wordnik.com/words/%s")
+
+/* Youtube */
+define_webjump("youtube","http://www.youtube.com/results?search_query=%s")
+
+/* Visuwords */
 
 /****************************************
 *               Webjumps end
