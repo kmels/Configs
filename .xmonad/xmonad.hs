@@ -29,7 +29,7 @@ import XMonad.Actions.GridSelect
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "gnome-terminal"
+myTerminal      = "terminator"
 --myTerminal      = "urxvt -tr +sb -fg white -bg black -tint white -sh 75 -fade 15 -fadecolor black -pr black -pr2 white"
  
                   -- Whether focus follows the mouse pointer. 

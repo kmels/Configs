@@ -5,6 +5,9 @@ modifiers.M = new modifier(
     function (event) { return event.metaKey; },
     function (event) { event.metaKey = true; });
 
+/* Allow extensions from untrusted sites */
+session_pref("xpinstall.whitelist.required", false);
+
 /****************************************
 *               Webjumps begin
 *****************************************/
@@ -34,17 +37,19 @@ define_webjump("youtube","http://www.youtube.com/results?search_query=%s")
 
 /* Visuwords */
 
+/* Hackage */
+define_webjump("hackage","http://google.com/search?as_sitesearch=hackage.haskell.org%2Fpackage&as_q=%s")
+
 /****************************************
 *               Webjumps end
 ****************************************/
 
-/* goto file://~/code/kmels.net */
-define_webjump("hackage","http://google.com/search?as_sitesearch=hackage.haskell.org%2Fpackage&as_q=%s")
-
-/* shortcut commands, e.g.
-M-x kmels-home => goto(file://~/code/kmels.net/_site) 
-*/
-
+/****************************************
+*               My shortcuts
+*
+* shortcut commands, e.g. M-x kmels-home => goto(file://~/code/kmels.net/_site) 
+*
+****************************************/
 var kmels_net_home = "file:///home/kmels/code/kmels.net/_site"
 function goto_url(document,url) {
     document.location.href = url;
@@ -56,3 +61,23 @@ interactive("mail","go to mail",function (I) { goto_url(I.buffer.document,"http:
 
 interactive("bank","go to onlinebank",function (I) { goto_url(I.buffer.document,"https://finanzportal.fiducia.de/p14pepe/entry?rzid=XC&rzbk=0838");})
 
+/****************************************
+*               MozRepl extension
+****************************************/
+
+/* start server on port 4242 is the default */
+user_pref('extensions.mozrepl.autoStart', true);
+
+if ('@hyperstruct.net/mozlab/mozrepl;1' in Cc) {
+  let mozrepl = Cc['@hyperstruct.net/mozlab/mozrepl;1']
+    .getService(Ci.nsIMozRepl);
+  if (! mozrepl.isActive())
+    mozrepl.start(4242);
+}
+
+/* Environment setup (related file: ~/.mozrepl-conkeror.js) */
+
+let (mozrepl_init = get_home_directory()) {
+    mozrepl_init.appendRelativePath(".mozrepl-conkeror.js");
+    session_pref('extensions.mozrepl.initUrl', make_uri(mozrepl_init).spec);
+}
