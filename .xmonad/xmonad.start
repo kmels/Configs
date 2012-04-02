@@ -11,7 +11,7 @@ xmodmap -e 'keycode  64=0xffeb' &
 emacs ~/Dropbox/org/kmels.org &
 conkeror "mail.kmels.net" &
 clementine &
-gnome-terminal &
+terminator &
 bitlbee -c ~/.bitlbee.conf &
 xchat & 
 skype &

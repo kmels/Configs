@@ -26,8 +26,14 @@ session_auto_save_auto_load = true;
 /* gmail-mode */
 require("gmail.js");
 
+/* override google to google.de */
+define_webjump("google","https://www.google.de/webhp#q=%s")
+
 /* Hackage */
 define_webjump("hackage","http://google.com/search?as_sitesearch=hackage.haskell.org%2Fpackage&as_q=%s")
+
+/* Reddit */
+define_webjump("reddit","http://www.reddit.com/search?q=%s")
 
 /* Wordnik */
 define_webjump("wordnik","http://www.wordnik.com/words/%s")
