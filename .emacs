@@ -7,7 +7,7 @@
 (global-set-key "\M-p" 'previous-buffer)
 
 ;navigation
-(global-set-key (kbd "<S-s-iso-lefttab>") 'othxer-window)
+(global-set-key (kbd "<S-s-iso-lefttab>") 'other-window)
 
 ;org-mode
 (global-set-key (kbd "<s-f1>") 'org-mobile-push)
