@@ -2,6 +2,16 @@
 ; general tweaks
 ; ****************************************
 
+;keybindings
+(global-set-key "\M-n" 'next-buffer)
+(global-set-key "\M-p" 'previous-buffer)
+
+;navigation
+(global-set-key (kbd "<S-s-iso-lefttab>") 'othxer-window)
+
+;org-mode
+(global-set-key (kbd "<s-f1>") 'org-mobile-push)
+
 ; FONT
 (set-default-font "-unknown-Inconsolata-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
 
@@ -92,14 +102,16 @@
 
 ;; ****************************************
 ;; haskell-mode
-;; http://www.haskell.org/haskellwiki/Haskell_mode_for_Emacs
+;; https://github.com/haskell/haskell-mode
 ;; ****************************************
-(load "~/.emacs.d/prog-lang/haskell-mode/haskell-site-file.el")
+(load "~/.emacs.d/prog-lang/haskell-mode/haskell-site-file")
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
+;NOTE: the three indendation modules are mutually exclusive (at most 1 can be used).
 
 ; ****************************************
 ; r-mode, http://ess.r-project.org
@@ -126,7 +138,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org"))))
+ '(org-agenda-files (quote ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org"))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.

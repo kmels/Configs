@@ -10,8 +10,18 @@ ELFILES = \
 	haskell-hugs.el \
 	haskell-indent.el \
 	haskell-indentation.el \
+	haskell-checkers.el \
 	haskell-mode.el \
 	haskell-simple-indent.el \
+	haskell-sort-imports.el \
+	haskell-align-imports.el \
+	haskell-move-nested.el \
+	haskell-navigate-imports.el \
+	haskell-interactive-mode.el \
+	haskell-package.el \
+	haskell-process.el \
+	haskell-session.el \
+	haskell-string.el \
 	ghc-core.el \
 	inf-haskell.el
 

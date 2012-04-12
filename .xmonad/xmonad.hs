@@ -183,7 +183,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_z),     toggleWS)
         
       -- Quit xmonad
-    , ((modm .|. shiftMask, xK_p     ), io (exitWith ExitSuccess))
+    --, ((modm .|. shiftMask, xK_p     ), io (exitWith ExitSuccess))
  
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
