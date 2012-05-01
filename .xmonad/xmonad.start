@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 #invert Super_L and Alt_L
 xmodmap -e 'keycode 133=0xffe9' &
@@ -15,3 +15,4 @@ terminator &
 bitlbee -c ~/.bitlbee.conf &
 xchat & 
 skype &
+rm -rf ~/tmp/* &

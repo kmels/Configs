@@ -26,10 +26,18 @@ import qualified XMonad.Actions.Submap as SM
 import qualified XMonad.Actions.Search as S
 import XMonad.Actions.GridSelect
 
+import Control.Arrow ((&&&),first)
+
+import XMonad.Actions.Launcher
+
+--some code reading helpers
+altMask = mod4Mask --this is the super key, but I have it remapped
+
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
 myTerminal      = "terminator"
+--myTerminal      = "gnome-terminal"
 --myTerminal      = "urxvt -tr +sb -fg white -bg black -tint white -sh 75 -fade 15 -fadecolor black -pr black -pr2 white"
  
                   -- Whether focus follows the mouse pointer. 
@@ -38,7 +46,7 @@ myFocusFollowsMouse = False
  
 -- Width of the window border in pixels.
 --
-myBorderWidth   = 1
+myBorderWidth   = 3
  
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -77,24 +85,94 @@ myModMask       = mod1Mask
 --
 myWorkspaces    = ["maintask","browser","code","shell","windows","6","translate","mail","music"]
  
+
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor = "#ff0000"
+
+{---------------------------------------
+ XPrompt key map; Fly in texts with emacs-like key bindings
+----------------------------------------}
+kmelsXPKeymap :: M.Map (KeyMask,KeySym) (XP ())
+kmelsXPKeymap = M.fromList $
+  map (first $ (,) controlMask) -- control + <key>
+  [ (xK_z, killBefore) --kill line backwards
+  , (xK_k, killAfter) -- kill line fowards
+  , (xK_a, startOfLine) --move to the beginning of the line
+  , (xK_e, endOfLine) -- move to the end of the line
+  , (xK_m, deleteString Next) -- delete a character foward
+  , (xK_b, moveCursor Prev) -- move cursor forward
+  , (xK_f, moveCursor Next) -- move cursor backward
+  , (xK_BackSpace, killWord Prev) -- kill the previous word
+  , (xK_y, pasteString)  
+  , (xK_g, quit)
+  , (xK_bracketleft, quit)
+  ] ++
+  map (first $ (,) altMask) -- meta key + <key>
+  [ (xK_BackSpace, killWord Prev)
+  , (xK_f, moveWord Next) -- move a word forward
+  , (xK_b, moveWord Prev) -- move a word backward
+  , (xK_d, killWord Next) -- kill the next word
+  , (xK_n, moveHistory W.focusUp')
+  , (xK_p, moveHistory W.focusDown')
+  ]
+  ++
+  map (first $ (,) 0) -- <key>
+  [ (xK_Return, setSuccess True >> setDone True)
+  , (xK_KP_Enter, setSuccess True >> setDone True)
+  , (xK_BackSpace, deleteString Prev)
+  , (xK_Delete, deleteString Next)
+  , (xK_Left, moveCursor Prev)
+  , (xK_Right, moveCursor Next)
+  , (xK_Home, startOfLine)
+  , (xK_End, endOfLine)
+  , (xK_Down, moveHistory W.focusUp')
+  , (xK_Up, moveHistory W.focusDown')
+  , (xK_Escape, quit)
+  ]
+
+{---------------------------------------
+ XPrompt config
+----------------------------------------}
+kmelsXPConfig =
+    XPC { font              = "-misc-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
+        , bgColor           = "grey22"
+        , fgColor           = "grey80"
+        , fgHLight          = "black"
+        , bgHLight          = "grey"
+        , borderColor       = "white"
+        , promptBorderWidth = 1
+        , promptKeymap      = kmelsXPKeymap
+        , completionKey     = xK_Tab
+        , position          = Bottom
+        , height            = 18
+        , historySize       = 256
+        , historyFilter     = id
+        , defaultText       = []
+        , autoComplete      = Nothing
+        , showCompletionOnTab = True
+        , searchPredicate   = isPrefixOf
+        }
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
-    -- launch a terminal
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    [    
+      -- testing Xmonad.Prompt.Shell --
+      ((modm .|. controlMask, xK_x), launcherPrompt kmelsXPConfig)
+     , ((modm .|. controlMask, xK_c), shellPrompt kmelsXPConfig)
+      
+      -- launch a terminal
+     , ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
  
-    -- launch dmenu
-    , ((modm,               xK_space     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+      -- launch dmenu
+     , ((modm,               xK_space     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
  
     -- launch gmrun
-    --, ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
+--    --, ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
  
     -- close focused window
     , ((modm .|. shiftMask, xK_w     ), kill)    
@@ -106,7 +184,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_grave ), setLayout $ XMonad.layoutHook conf)
  
     -- Resize viewed windows to the correct size
-    , ((modm,               xK_n     ), refresh)
+    , ((modm,               xK_j     ), refresh)
  
       -- nautilus
     , ((modm,                 xK_Up    ), spawn "nautilus ~")
@@ -115,10 +193,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_Tab   ), windows W.focusDown)
  
     -- Move focus to the next window
-    , ((modm,               xK_j     ), windows W.focusDown)
+    , ((modm,               xK_n     ), windows W.focusDown)
  
     -- Move focus to the previous window
-    , ((modm,               xK_k     ), windows W.focusUp  )
+    , ((modm,               xK_p     ), windows W.focusUp  )
  
     -- Move focus to the master window
     , ((modm,               xK_m     ), windows W.focusMaster  )
@@ -373,11 +451,11 @@ kmelsConfig = gnomeConfig{
   focusedBorderColor = myFocusedBorderColor,
   
   -- key bindings
-  keys               = myKeys,
+  keys               = myKeys
   --mouseBindings      = myMouseBindings,
   
   -- hooks, layouts
   --           layoutHook         = myLayout
-  manageHook         = myManageHook
+  , manageHook         = myManageHook
   --handleEventHook    = myEventHook,
 }

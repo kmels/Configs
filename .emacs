@@ -1,10 +1,12 @@
 ; ****************************************
 ; general tweaks
 ; ****************************************
-
 ;keybindings
+(setenv "PATH" (concat "/home/kmels/.cabal/bin:" (getenv "PATH")))
+
 (global-set-key "\M-n" 'next-buffer)
 (global-set-key "\M-p" 'previous-buffer)
+(global-set-key (kbd "<f2> RET") 'make-frame-command)
 
 ;navigation
 (global-set-key (kbd "<S-s-iso-lefttab>") 'other-window)
@@ -13,7 +15,8 @@
 (global-set-key (kbd "<s-f1>") 'org-mobile-push)
 
 ; FONT
-(set-default-font "-unknown-Inconsolata-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+;(set-default-font "-unknown-Inconsolata-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+(set-default-font "-microsoft-Consolas-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
 
 ; avoid backup (~) temp file
 (setq make-backup-files nil)
@@ -54,6 +57,10 @@
 (setq org-mobile-inbox-for-pull "~/Dropbox/org/flagged.org")
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
+
+;; automatically pull and push on start/exit of emacs
+;(add-hook 'after-init-hook 'org-mobile-pull)
+;(add-hook 'kill-emacs-hook 'org-mobile-push) 
 
 (defun ledger-add-entry (title in amount out)
       (interactive
@@ -146,3 +153,7 @@
   ;; If there is more than one, they won't work right.
  )
 
+;****************************************(
+;haskell-mode new stuff (TRUNK)
+;****************************************
+(load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")

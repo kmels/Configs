@@ -19,6 +19,9 @@ define_webjump("dict.cc", "http://www.dict.cc/?s=%s");
 /* Hoogle */
 define_webjump("hoogle", "http://www.haskell.org/hoogle/?hoogle=%s");
 
+/* Last.fm */
+define_webjump("last.fm", "http://www.last.fm/search?q=%s");
+
 /* Sessions */ 
 require("session.js"); 
 session_auto_save_auto_load = true;
@@ -35,16 +38,25 @@ define_webjump("hackage","http://google.com/search?as_sitesearch=hackage.haskell
 /* Reddit */
 define_webjump("reddit","http://www.reddit.com/search?q=%s")
 
+/* Stackoverflow */
+define_webjump("stackoverflow","http://stackoverflow.com/search?q=%s")
+
 /* Wordnik */
 define_webjump("wordnik","http://www.wordnik.com/words/%s")
 
 /* Youtube */
 define_webjump("youtube","http://www.youtube.com/results?search_query=%s")
 
+/* Vimeo */
+define_webjump("vimeo","http://vimeo.com/search?q=%s")
+
 /* Visuwords */
 
 /* Hackage */
 define_webjump("hackage","http://google.com/search?as_sitesearch=hackage.haskell.org%2Fpackage&as_q=%s")
+
+/* private webjumps */
+load(make_file("~/.conkerorrc.private.js"));
 
 /****************************************
 *               Webjumps end
