@@ -58,10 +58,6 @@
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 
-;; automatically pull and push on start/exit of emacs
-;(add-hook 'after-init-hook 'org-mobile-pull)
-;(add-hook 'kill-emacs-hook 'org-mobile-push) 
-
 (defun ledger-add-entry (title in amount out)
       (interactive
        (let ((accounts (mapcar 'list (ledger-accounts))))
@@ -145,6 +141,9 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(haskell-notify-p t)
+ '(haskell-process-path-cabal-dev "/home/kmels/.cabal/bin/cabal-dev")
+ '(haskell-process-type (quote cabal-dev))
  '(org-agenda-files (quote ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org"))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -153,7 +152,31 @@
   ;; If there is more than one, they won't work right.
  )
 
+;; automatically org-mobile-push on save of a file
+(add-hook 
+ 'after-save-hook 
+ (lambda ()
+   (let (
+         (org-filenames (mapcar 'file-name-nondirectory org-agenda-files)) ; list of org file names (not paths)
+         (filename (file-name-nondirectory buffer-file-name)) ; list of the buffers filename (not path)
+         )
+     (if (find filename org-filenames :test #'string=)
+         (org-mobile-push)        
+       )
+     )
+   )
+)
+
 ;****************************************(
 ;haskell-mode new stuff (TRUNK)
 ;****************************************
 (load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")
+
+(defun count-words (start end)
+    "Print number of words in the region."
+    (interactive "r")
+    (save-excursion
+      (save-restriction
+        (narrow-to-region start end)
+        (goto-char (point-min))
+        (count-matches "\\sw+"))))

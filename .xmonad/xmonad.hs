@@ -12,6 +12,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import XMonad.Hooks.ManageHelpers 
 import XMonad.Prompt
+
 import XMonad.Prompt.Input
 import XMonad.Prompt.RunOrRaise
 import XMonad.Prompt.Shell
@@ -155,6 +156,19 @@ kmelsXPConfig =
         , searchPredicate   = isPrefixOf
         }
 
+{----------------------------------------
+ Extension actions
+ ---------------------------------------}
+extensionActions :: M.Map String (String -> X())
+extensionActions = M.fromList $ 
+   [
+     (".el", \p -> spawn $ "emacsclient " ++ p)
+   , (".hs", \p -> spawn $ "emacsclient " ++ p)
+   , (".com", \p -> spawn $ "conkeror " ++ p)
+   , (".pdf", \p -> spawn $ "acroread " ++ p)
+   , (".", \p -> spawn $ "emacsclient " ++ p)
+   ]
+
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -162,7 +176,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
     [    
       -- testing Xmonad.Prompt.Shell --
-      ((modm .|. controlMask, xK_x), launcherPrompt kmelsXPConfig)
+      ((modm .|. controlMask, xK_x), launcherPrompt kmelsXPConfig extensionActions)
      , ((modm .|. controlMask, xK_c), shellPrompt kmelsXPConfig)
       
       -- launch a terminal
@@ -235,7 +249,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_e), spawn "emacs")
             
       --Search
-    , ((modm, xK_s), SM.submap $ searchEngineMap $ S.promptSearch P.defaultXPConfig)      
+    , ((modm, xK_s), SM.submap $ searchEngineMap $ S.promptSearch P.defaultXPConfig) 
     , ((modm .|. shiftMask, xK_s), SM.submap $ searchEngineMap $ S.selectSearch)
       
       -- Grid select
@@ -291,7 +305,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_bracketleft, xK_bracketright, xK_backslash] [0..]
+        | (key, sc) <- zip [xK_bracketright, xK_backslash] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]    
 
 -- Non-numeric num pad keys, sorted by number 
