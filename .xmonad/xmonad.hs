@@ -5,7 +5,6 @@ import XMonad.Config.Gnome
 import XMonad.Util.Replace
 
 import XMonad.Actions.Search
-
 import qualified XMonad.Actions.Submap as SM
 
 import qualified XMonad.StackSet as W
@@ -137,17 +136,18 @@ kmelsXPKeymap = M.fromList $
  XPrompt config
 ----------------------------------------}
 kmelsXPConfig =
-    XPC { font              = "-misc-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
-        , bgColor           = "grey22"
+    XPC { font              = "-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*"
+        , bgColor           = "grey7"
         , fgColor           = "grey80"
-        , fgHLight          = "black"
-        , bgHLight          = "grey"
-        , borderColor       = "white"
+        , bgHLight          = "peru"
+        , fgHLight          = "DarkGreen"
+        , borderColor       = "gray3"
         , promptBorderWidth = 1
         , promptKeymap      = kmelsXPKeymap
         , completionKey     = xK_Tab
+        , changeModeKey     = xK_grave
         , position          = Bottom
-        , height            = 18
+        , height            = 60
         , historySize       = 256
         , historyFilter     = id
         , defaultText       = []
@@ -381,10 +381,13 @@ myLayout = tiled ||| Mirror tiled ||| Full
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll [
-  manageHook gnomeConfig,
-  className =? "Clementine" --> doShift "music",
-  className =? "Xchat" --> doShift "talk",
-  className =? "Skype" --> doShift "talk"
+  manageHook gnomeConfig
+  , className =? "Clementine" --> doShift "music"
+  , className =? "Xchat" --> doShift "talk"
+  , className =? "Skype" --> doShift "talk"
+  , className =? "Unity-2d-panel" --> doIgnore
+  , className =? "Unity-2d-shell" --> doFloat
+  , className =? "Unity-2d-launcher" --> doFloat
   ]
                
 --myManageHook = composeOne [
@@ -449,8 +452,6 @@ searchEngineMap method = M.fromList $
        , ((0, xK_w), method S.wikipedia)
        , ((0, xK_y), method S.youtube)
        ]
---main = xmonad defaults 
-main = xmonad kmelsConfig 
        
 kmelsConfig = gnomeConfig{
   terminal           = myTerminal,
@@ -473,3 +474,16 @@ kmelsConfig = gnomeConfig{
   , manageHook         = myManageHook
   --handleEventHook    = myEventHook,
 }
+
+--main = xmonad defaults 
+
+
+myGManageHook = composeAll (
+    [ manageHook gnomeConfig
+    , className =? "Unity-2d-panel" --> doIgnore
+    , className =? "Unity-2d-launcher" --> doFloat
+    ])
+
+main = xmonad kmelsConfig 
+--main = xmonad gnomeConfig { manageHook = myGkilManageHook }
+

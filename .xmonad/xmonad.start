@@ -4,17 +4,17 @@
 xmodmap -e 'keycode 133=0xffe9' &
 xmodmap -e 'keycode  64=0xffeb' &
 
-#start favorite WM
-~/.cabal/bin/xmonad &
-
 #start favorite programs
-emacs ~/Dropbox/org/kmels.org &
-conkeror "mail.kmels.net" &
-clementine &
-terminator &
-bitlbee -c ~/.bitlbee.conf &
-xchat & 
+#emacs ~/Dropbox/org/kmels.org &
+#conkeror &
+#clementine &
+
+#terminator &
+#bitlbee -c ~/.bitlbee.conf &
+#xchat & 
 #skype &
 rm -rf ~/tmp/* &
+rm -rf ~/Downloads/* &
 
-
+#start favorite WM
+exec /home/kmels/.cabal/bin/xmonad

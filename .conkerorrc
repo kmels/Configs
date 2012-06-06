@@ -16,6 +16,8 @@ define_webjump("leo", "http://pda.leo.org/?lp=ende&lang=de&searchLoc=0&cmpType=r
 
 define_webjump("dict.cc", "http://www.dict.cc/?s=%s");
 
+define_webjump("github", "https://github.com/search?q=%s");
+
 /* Hoogle */
 define_webjump("hoogle", "http://www.haskell.org/hoogle/?hoogle=%s");
 

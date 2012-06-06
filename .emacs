@@ -16,7 +16,7 @@
 
 ; FONT
 ;(set-default-font "-unknown-Inconsolata-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
-(set-default-font "-microsoft-Consolas-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+;(set-default-font "-microsoft-Consolas-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
 
 ; avoid backup (~) temp file
 (setq make-backup-files nil)
@@ -144,6 +144,8 @@
  '(haskell-notify-p t)
  '(haskell-process-path-cabal-dev "/home/kmels/.cabal/bin/cabal-dev")
  '(haskell-process-type (quote cabal-dev))
+ '(haskell-stylish-on-save nil)
+ '(haskell-tags-on-save t)
  '(org-agenda-files (quote ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org"))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -180,3 +182,11 @@
         (narrow-to-region start end)
         (goto-char (point-min))
         (count-matches "\\sw+"))))
+
+;****************************************
+;autocomplete
+;****************************************
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+(ac-config-default)
