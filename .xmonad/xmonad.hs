@@ -154,6 +154,7 @@ kmelsXPConfig =
         , autoComplete      = Nothing
         , showCompletionOnTab = True
         , searchPredicate   = isPrefixOf
+        , alwaysHighlight   = True
         }
 
 {----------------------------------------
@@ -169,6 +170,11 @@ extensionActions = M.fromList $
    , (".", \p -> spawn $ "emacsclient " ++ p)
    ]
 
+kmelsLauncherConfig = LauncherConfig { 
+  pathToHoogle = "/home/kmels/.cabal/bin/hoogle", 
+  browser = "firefox" , 
+  actionsByExtension  = extensionActions 
+  }
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -176,7 +182,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
     [    
       -- testing Xmonad.Prompt.Shell --
-      ((modm .|. controlMask, xK_x), launcherPrompt kmelsXPConfig extensionActions)
+      ((modm .|. controlMask, xK_x), launcherPrompt kmelsXPConfig $ defaultLauncherModes kmelsLauncherConfig)
      , ((modm .|. controlMask, xK_c), shellPrompt kmelsXPConfig)
       
       -- launch a terminal
