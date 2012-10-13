@@ -5,13 +5,13 @@ import XMonad.Config.Gnome
 import XMonad.Util.Replace
 
 import XMonad.Actions.Search
-
 import qualified XMonad.Actions.Submap as SM
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import XMonad.Hooks.ManageHelpers 
 import XMonad.Prompt
+
 import XMonad.Prompt.Input
 import XMonad.Prompt.RunOrRaise
 import XMonad.Prompt.Shell
@@ -136,17 +136,18 @@ kmelsXPKeymap = M.fromList $
  XPrompt config
 ----------------------------------------}
 kmelsXPConfig =
-    XPC { font              = "-misc-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
-        , bgColor           = "grey22"
+    XPC { font              = "-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*"
+        , bgColor           = "grey7"
         , fgColor           = "grey80"
-        , fgHLight          = "black"
-        , bgHLight          = "grey"
-        , borderColor       = "white"
+        , bgHLight          = "peru"
+        , fgHLight          = "DarkGreen"
+        , borderColor       = "gray3"
         , promptBorderWidth = 1
         , promptKeymap      = kmelsXPKeymap
         , completionKey     = xK_Tab
+        , changeModeKey     = xK_grave
         , position          = Bottom
-        , height            = 18
+        , height            = 60
         , historySize       = 256
         , historyFilter     = id
         , defaultText       = []
@@ -155,6 +156,19 @@ kmelsXPConfig =
         , searchPredicate   = isPrefixOf
         }
 
+{----------------------------------------
+ Extension actions
+ ---------------------------------------}
+extensionActions :: M.Map String (String -> X())
+extensionActions = M.fromList $ 
+   [
+     (".el", \p -> spawn $ "emacsclient " ++ p)
+   , (".hs", \p -> spawn $ "emacsclient " ++ p)
+   , (".com", \p -> spawn $ "conkeror " ++ p)
+   , (".pdf", \p -> spawn $ "acroread " ++ p)
+   , (".", \p -> spawn $ "emacsclient " ++ p)
+   ]
+
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -162,7 +176,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
     [    
       -- testing Xmonad.Prompt.Shell --
-      ((modm .|. controlMask, xK_x), launcherPrompt kmelsXPConfig)
+      ((modm .|. controlMask, xK_x), launcherPrompt kmelsXPConfig extensionActions)
      , ((modm .|. controlMask, xK_c), shellPrompt kmelsXPConfig)
       
       -- launch a terminal
@@ -235,7 +249,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_e), spawn "emacs")
             
       --Search
-    , ((modm, xK_s), SM.submap $ searchEngineMap $ S.promptSearch P.defaultXPConfig)      
+    , ((modm, xK_s), SM.submap $ searchEngineMap $ S.promptSearch P.defaultXPConfig) 
     , ((modm .|. shiftMask, xK_s), SM.submap $ searchEngineMap $ S.selectSearch)
       
       -- Grid select
@@ -291,7 +305,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_bracketleft, xK_bracketright, xK_backslash] [0..]
+        | (key, sc) <- zip [xK_bracketright, xK_backslash] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]    
 
 -- Non-numeric num pad keys, sorted by number 
@@ -367,10 +381,13 @@ myLayout = tiled ||| Mirror tiled ||| Full
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll [
-  manageHook gnomeConfig,
-  className =? "Clementine" --> doShift "music",
-  className =? "Xchat" --> doShift "talk",
-  className =? "Skype" --> doShift "talk"
+  manageHook gnomeConfig
+  , className =? "Clementine" --> doShift "music"
+  , className =? "Xchat" --> doShift "talk"
+  , className =? "Skype" --> doShift "talk"
+  , className =? "Unity-2d-panel" --> doIgnore
+  , className =? "Unity-2d-shell" --> doFloat
+  , className =? "Unity-2d-launcher" --> doFloat
   ]
                
 --myManageHook = composeOne [
@@ -435,8 +452,6 @@ searchEngineMap method = M.fromList $
        , ((0, xK_w), method S.wikipedia)
        , ((0, xK_y), method S.youtube)
        ]
---main = xmonad defaults 
-main = xmonad kmelsConfig 
        
 kmelsConfig = gnomeConfig{
   terminal           = myTerminal,
@@ -459,3 +474,16 @@ kmelsConfig = gnomeConfig{
   , manageHook         = myManageHook
   --handleEventHook    = myEventHook,
 }
+
+--main = xmonad defaults 
+
+
+myGManageHook = composeAll (
+    [ manageHook gnomeConfig
+    , className =? "Unity-2d-panel" --> doIgnore
+    , className =? "Unity-2d-launcher" --> doFloat
+    ])
+
+main = xmonad kmelsConfig 
+--main = xmonad gnomeConfig { manageHook = myGkilManageHook }
+

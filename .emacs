@@ -1,7 +1,7 @@
 ; ****************************************
-; general tweaks
+; general 
 ; ****************************************
-;keybindings
+; If some program uses a cabal binary (maybe cabal-dev for haskell-mode)
 (setenv "PATH" (concat "/home/kmels/.cabal/bin:" (getenv "PATH")))
 
 (global-set-key "\M-n" 'next-buffer)
@@ -16,7 +16,7 @@
 
 ; FONT
 ;(set-default-font "-unknown-Inconsolata-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
-(set-default-font "-microsoft-Consolas-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+;(set-default-font "-microsoft-Consolas-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
 
 ; avoid backup (~) temp file
 (setq make-backup-files nil)
@@ -25,7 +25,7 @@
 (setq x-select-enable-clipboard t )
 
 ;; ***************************************
-;; color-theme
+;; color-theme (make emacs look better)
 ;; ****************************************
 (add-to-list 'load-path "~/.emacs.d/common/color-theme-6.6.0")
 (load "~/.emacs.d/color-theme-tomorrow-night.el")
@@ -36,7 +36,7 @@
      (color-theme-kmels)))
 
 ;; ****************************************
-;; org-mode 7.8
+;; org-mode 
 ;; ****************************************
 (setq load-path (cons "~/.emacs.d/common/org-7.8.03/lisp/" load-path))
 (setq load-path (cons "~/.emacs.d/common/org-7.8.03/contrib/lisp/" load-path))
@@ -51,17 +51,32 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (transient-mark-mode 1)
 
-;; Set to the location of your Org files on your local system
+; automatically org-mobile-push on save of a file
+(add-hook 
+ 'after-save-hook 
+ (lambda ()
+   (let (
+         (org-filenames (mapcar 'file-name-nondirectory org-agenda-files)) ; list of org file names (not paths)
+         (filename (file-name-nondirectory buffer-file-name)) ; list of the buffers filename (not path)
+         )
+     (if (find filename org-filenames :test #'string=)
+         (org-mobile-push)        
+       )
+     )
+   )
+)
+
+
+;; Location of org files
 (setq org-directory "~/Dropbox/org")
-;; Set to the name of the file where new notes will be stored
+;; MobileOrg, where to pull new notes
 (setq org-mobile-inbox-for-pull "~/Dropbox/org/flagged.org")
-;; Set to <your Dropbox root directory>/MobileOrg.
+;; MobileOrg, what to push
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 
-;; automatically pull and push on start/exit of emacs
-;(add-hook 'after-init-hook 'org-mobile-pull)
-;(add-hook 'kill-emacs-hook 'org-mobile-push) 
-
+;; ****************************************
+;; ledger (accounting)
+;; ****************************************
 (defun ledger-add-entry (title in amount out)
       (interactive
        (let ((accounts (mapcar 'list (ledger-accounts))))
@@ -81,31 +96,31 @@
 
 
 ; ****************************************
-; scala-mode
+; scala-mode (DEACTIVATED)
 ; ****************************************
- (add-to-list 'load-path (expand-file-name "~/.emacs.d/prog-lang/scala-mode"))
- (load "scala-mode-auto.el")
+; (add-to-list 'load-path (expand-file-name "~/.emacs.d/prog-lang/scala-mode"))
+; (load "scala-mode-auto.el")
 
- (require 'scala-mode-auto)
+; (require 'scala-mode-auto)
 
- (add-hook 'scala-mode-hook
-           '(lambda ()
-              (yas/minor-mode-on)))
+; (add-hook 'scala-mode-hook
+;           '(lambda ()
+;              (yas/minor-mode-on)))
 
 ;; ;****************************************
-;; ; Nxhtml-mode
+;; ; Nxhtml-mode (DEACTIVATED)
 ;; ;****************************************
- (load "~/.emacs.d/webdev/nxhtml/autostart.el")
+; (load "~/.emacs.d/webdev/nxhtml/autostart.el")
  ;;(setq mumamo-background-colors nil) 
- (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+; (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
 
 ;; ;****************************************
-;; ; Espresso mode (javascript)
+;; ; Espresso mode for javascript (DEACTIVATED)
 ;; ;****************************************
-(load "~/.emacs.d/webdev/espresso.el")
-(autoload #'espresso-mode "espresso" "Start espresso-mode" t)
-(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
+;(load "~/.emacs.d/webdev/espresso.el")
+;(autoload #'espresso-mode "espresso" "Start espresso-mode" t)
+;(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+;(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 
 ;; ****************************************
 ;; haskell-mode
@@ -122,30 +137,38 @@
 ;NOTE: the three indendation modules are mutually exclusive (at most 1 can be used).
 
 ; ****************************************
-; r-mode, http://ess.r-project.org
+; r-mode, http://ess.r-project.org (DEACTIVATED)
 ; ****************************************
-(add-to-list 'load-path "~/.emacs.d/statistics/ess-5.14/lisp")
-(require 'ess-site)
+;(add-to-list 'load-path "~/.emacs.d/statistics/ess-5.14/lisp")
+;(require 'ess-site)
 
 ;****************************************
-; octave-mode
+; octave-mode (DEACTIVATED)
 ;****************************************
-(autoload 'octave-mode "octave-mod" nil t)
-(setq auto-mode-alist
-      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+;(autoload 'octave-mode "octave-mod" nil t)
+;(setq auto-mode-alist
+;      (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
 ;****************************************
-;Set 4 Space Indent http://stackoverflow.com/questions/69934/set-4-space-indent-in-emacs-in-text-mode
+; Set 4 Space Indent http://stackoverflow.com/questions/69934/set-4-space-indent-in-emacs-in-text-mode
 ;****************************************
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 
+;****************************************
+; custom variables
+;****************************************
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(haskell-notify-p t)
+ '(haskell-process-path-cabal-dev "/home/kmels/.cabal/bin/cabal-dev")
+ '(haskell-process-type (quote cabal-dev))
+ '(haskell-stylish-on-save nil)
+ '(haskell-tags-on-save t)
  '(org-agenda-files (quote ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org"))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -153,6 +176,31 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+
+;****************************************(
+;haskell-mode new stuff (TRUNK)
+;****************************************
+(load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")
+
+;****************************************
+; tools
+;****************************************
+(defun count-words (start end)
+    "Print number of words in the region."
+    (interactive "r")
+    (save-excursion
+      (save-restriction
+        (narrow-to-region start end)
+        (goto-char (point-min))
+        (count-matches "\\sw+"))))
+
+;****************************************
+;autocomplete
+;****************************************
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+(ac-config-default)
 
 ;****************************************
 ; hamlet-mode
