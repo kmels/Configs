@@ -115,6 +115,7 @@
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
@@ -153,7 +154,8 @@
   ;; If there is more than one, they won't work right.
  )
 
-;****************************************(
-;haskell-mode new stuff (TRUNK)
 ;****************************************
-(load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")
+; hamlet-mode
+;****************************************
+(add-to-list 'load-path "~/.emacs.d/meta-lang/hamlet-mode.el")
+(require 'hamlet-mode)
