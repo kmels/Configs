@@ -172,8 +172,7 @@ extensionActions = M.fromList $
 
 kmelsLauncherConfig = LauncherConfig { 
   pathToHoogle = "/home/kmels/.cabal/bin/hoogle", 
-  browser = "firefox" , 
-  actionsByExtension  = extensionActions 
+  browser = "firefox" 
   }
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
