@@ -11,22 +11,16 @@ import qualified Data.Map        as M
 
 -- Actions
 import XMonad.Actions.CycleWS
+import XMonad.Actions.Launcher
 import XMonad.Actions.Search
 import XMonad.Prompt
 import XMonad.Prompt.Shell
 
--- Looks
-import XMonad.Hooks.DynamicLog -- dzen
-
-import XMonad.Hooks.ManageHelpers 
-
-import XMonad.Util.EZConfig
-import qualified XMonad.Prompt as P
 import qualified XMonad.Actions.Submap as SM
 import qualified XMonad.Actions.Search as S
-import XMonad.Actions.GridSelect
 
-import XMonad.Actions.Launcher
+-- Looks
+import XMonad.Hooks.DynamicLog -- dzen
 
 -- | Initiates xmonad
 --main = replace >> (xmonad xConfig)
