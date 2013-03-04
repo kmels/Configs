@@ -30,72 +30,42 @@ import Control.Arrow ((&&&),first)
 
 import XMonad.Actions.Launcher
 
---some code reading helpers
-altMask = mod4Mask --this is the super key, but I have it remapped
+-- | Initiates xmonad
+main = do 
+  replace
+  xmonad xConfig
+  
+-- | XMonad Config
+xConfig = gnomeConfig{
+  terminal           = "gnome-terminal",
+--  focusFollowsMouse  = False,
+  
+  ------------------------------
+  --    mask     |    key       |
+  ------------------------------
+  --   mod1Mask  |  left alt    |
+  --   mod3Mask  |  right alt   |
+  --   mod4Mask  |  windows key |
+  ------------------------------
+  modMask            = mod1Mask,
+  workspaces         = ["free","help","code","shell","free2","communications","translate","browser","multimedia"],
+  
+  normalBorderColor  = "#242424",
+  focusedBorderColor = "#CC0000", 
+  borderWidth        = 2,
+  
+  keys               = myKeys
+  --mouseBindings      = myMouseBindings,
+  
+  -- hooks, layouts
+  --           layoutHook         = myLayout
+  , manageHook         = myManageHook
+  --handleEventHook    = myEventHook,
+}
 
--- The preferred terminal program, which is used in a binding below and by
--- certain contrib modules.
---
-myTerminal      = "terminator"
---myTerminal      = "gnome-terminal"
---myTerminal      = "urxvt -tr +sb -fg white -bg black -tint white -sh 75 -fade 15 -fadecolor black -pr black -pr2 white"
- 
-                  -- Whether focus follows the mouse pointer. 
-myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = False
- 
--- Width of the window border in pixels.
---
-myBorderWidth   = 3
- 
--- modMask lets you specify which modkey you want to use. The default
--- is mod1Mask ("left alt").  You may also consider using mod3Mask
--- ("right alt"), which does not conflict with emacs keybindings. The
--- "windows key" is usually mod4Mask.
---
-myModMask       = mod1Mask
- 
--- NOTE: from 0.9.1 on numlock mask is set automatically. The numlockMask
--- setting should be removed from configs.
---
--- You can safely remove this even on earlier xmonad versions unless you
--- need to set it to something other than the default mod2Mask, (e.g. OSX).
---
--- The mask for the numlock key. Numlock status is "masked" from the
--- current modifier status, so the keybindings will work with numlock on or
--- off. You may need to change this on some systems.
---
--- You can find the numlock modifier by running "xmodmap" and looking for a
--- modifier with Num_Lock bound to it:
---
--- > $ xmodmap | grep Num
--- > mod2        Num_Lock (0x4d)
---
--- Set numlockMask = 0 if you don't have a numlock key, or want to treat
--- numlock status separately.
---
--- myNumlockMask   = mod2Mask -- deprecated in xmonad-0.9.1
-------------------------------------------------------------
- 
- 
--- The default number of workspaces (virtual screens) and their names.
--- By default we use numeric strings, but any string may be used as a
--- workspace name. The number of workspaces is determined by the length
--- of this list.
---
-myWorkspaces    = ["maintask","browser","code","shell","windows","6","translate","mail","music"]
- 
-
--- Border colors for unfocused and focused windows, respectively.
---
-myNormalBorderColor  = "#dddddd"
-myFocusedBorderColor = "#ff0000"
-
-{---------------------------------------
- XPrompt key map; Fly in texts with emacs-like key bindings
-----------------------------------------}
-kmelsXPKeymap :: M.Map (KeyMask,KeySym) (XP ())
-kmelsXPKeymap = M.fromList $
+-- | XPrompt emacs-like key bindings
+promptKeys :: M.Map (KeyMask,KeySym) (XP ())
+promptKeys = M.fromList $
   map (first $ (,) controlMask) -- control + <key>
   [ (xK_z, killBefore) --kill line backwards
   , (xK_k, killAfter) -- kill line fowards
@@ -109,7 +79,7 @@ kmelsXPKeymap = M.fromList $
   , (xK_g, quit)
   , (xK_bracketleft, quit)
   ] ++
-  map (first $ (,) altMask) -- meta key + <key>
+  map (first $ (,) mod4Mask) -- meta key + <key>
   [ (xK_BackSpace, killWord Prev)
   , (xK_f, moveWord Next) -- move a word forward
   , (xK_b, moveWord Prev) -- move a word backward
@@ -132,10 +102,8 @@ kmelsXPKeymap = M.fromList $
   , (xK_Escape, quit)
   ]
 
-{---------------------------------------
- XPrompt config
-----------------------------------------}
-kmelsXPConfig =
+-- | XPrompt config
+promptConfig =
     XPC { font              = "-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*"
         , bgColor           = "grey7"
         , fgColor           = "grey80"
@@ -143,7 +111,7 @@ kmelsXPConfig =
         , fgHLight          = "DarkGreen"
         , borderColor       = "gray3"
         , promptBorderWidth = 1
-        , promptKeymap      = kmelsXPKeymap
+        , promptKeymap      = promptKeys
         , completionKey     = xK_Tab
         , changeModeKey     = xK_grave
         , position          = Bottom
@@ -157,11 +125,9 @@ kmelsXPConfig =
         , alwaysHighlight   = True
         }
 
-{----------------------------------------
- Extension actions
- ---------------------------------------}
-extensionActions :: M.Map String (String -> X())
-extensionActions = M.fromList $ 
+-- | Which program should open a file 
+extPrograms :: M.Map String (String -> X())
+extPrograms = M.fromList $ 
    [
      (".el", \p -> spawn $ "emacsclient " ++ p)
    , (".hs", \p -> spawn $ "emacsclient " ++ p)
@@ -170,61 +136,59 @@ extensionActions = M.fromList $
    , (".", \p -> spawn $ "emacsclient " ++ p)
    ]
 
-kmelsLauncherConfig = LauncherConfig { 
+-- | Configuration for launcher
+launcherConfig = LauncherConfig { 
   pathToHoogle = "/home/kmels/.cabal/bin/hoogle", 
-  browser = "firefox" 
+  browser = "conkeror" 
   }
-------------------------------------------------------------------------
--- Key bindings. Add, modify or remove key bindings here.
---
+
+-- | XMonad key bindings
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
     [    
-      -- testing Xmonad.Prompt.Shell --
-      ((modm .|. controlMask, xK_x), launcherPrompt kmelsXPConfig $ defaultLauncherModes kmelsLauncherConfig)
-     , ((modm .|. controlMask, xK_c), shellPrompt kmelsXPConfig)
+      -- Xmonad.Actions.Launcher
+      ((modm .|. controlMask, xK_x), launcherPrompt promptConfig $ defaultLauncherModes launcherConfig),
+      -- Xmonad.Prompt.Shell
+      ((modm .|. controlMask, xK_c), shellPrompt promptConfig), 
       
-      -- launch a terminal
-     , ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+      -- Spawn a terminal
+      ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf),
  
-      -- launch dmenu
-     , ((modm,               xK_space     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
- 
-    -- launch gmrun
---    --, ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
- 
-    -- close focused window
-    , ((modm .|. shiftMask, xK_w     ), kill)    
- 
-     -- Rotate through the available layout algorithms
-    , ((modm,               xK_grave ), sendMessage NextLayout)
+      -- Spawn dmenu
+      ((modm, xK_space), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\""), 
       
-    --  Reset the layouts on the current workspace to default
-    , ((modm .|. shiftMask, xK_grave ), setLayout $ XMonad.layoutHook conf)
- 
-    -- Resize viewed windows to the correct size
-    , ((modm,               xK_j     ), refresh)
- 
-      -- nautilus
-    , ((modm,                 xK_Up    ), spawn "nautilus ~")
+      -- Close window
+      ((modm .|. shiftMask, xK_w     ), kill),
       
-    -- Move focus to the next window
-    , ((modm,               xK_Tab   ), windows W.focusDown)
+      -- Next layout
+      ((modm, xK_grave ), sendMessage NextLayout),
+      
+      --  Reset the layouts on the current workspace to default
+      ((modm .|. shiftMask, xK_grave ), setLayout $ XMonad.layoutHook conf), 
+      
+      -- Resize viewed windows to the correct size
+      ((modm, xK_j ), refresh),
+        
+      -- File Explorer
+      ((modm, xK_Up ), spawn "nemo ~"),
+      
+      -- Move focus to the next window
+      ((modm, xK_Tab ), windows W.focusDown),
+      
+      -- Move focus to the next window
+      ((modm, xK_n ), windows W.focusDown),
  
-    -- Move focus to the next window
-    , ((modm,               xK_n     ), windows W.focusDown)
+      -- Move focus to the previous window
+      ((modm, xK_p ), windows W.focusUp ),
  
-    -- Move focus to the previous window
-    , ((modm,               xK_p     ), windows W.focusUp  )
+      -- Move focus to the master window
+      ((modm, xK_m ), windows W.focusMaster ),
  
-    -- Move focus to the master window
-    , ((modm,               xK_m     ), windows W.focusMaster  )
+      -- Swap the focused window and the master window
+      ((modm, xK_Return), windows W.swapMaster), 
  
-    -- Swap the focused window and the master window
-    , ((modm,               xK_Return), windows W.swapMaster)
- 
-    -- Swap the focused window with the next window
-    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
+      -- Swap the focused window with the next window
+      ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
  
     -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
@@ -258,7 +222,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_s), SM.submap $ searchEngineMap $ S.selectSearch)
       
       -- Grid select
-      , ((modm, xK_g), goToSelected defaultGSConfig)
+--      , ((modm, xK_g), goToSelected defaultGSConfig)
         
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -457,28 +421,6 @@ searchEngineMap method = M.fromList $
        , ((0, xK_w), method S.wikipedia)
        , ((0, xK_y), method S.youtube)
        ]
-       
-kmelsConfig = gnomeConfig{
-  terminal           = myTerminal,
-  focusFollowsMouse  = myFocusFollowsMouse,
-  borderWidth        = myBorderWidth,
-  modMask            = myModMask,
-  
-  -- numlockMask deprecated in 0.9.1
-  -- numlockMask        = myNumlockMask,
-  workspaces         = myWorkspaces,
-  normalBorderColor  = myNormalBorderColor,
-  focusedBorderColor = myFocusedBorderColor,
-  
-  -- key bindings
-  keys               = myKeys
-  --mouseBindings      = myMouseBindings,
-  
-  -- hooks, layouts
-  --           layoutHook         = myLayout
-  , manageHook         = myManageHook
-  --handleEventHook    = myEventHook,
-}
 
 --main = xmonad defaults 
 
@@ -489,6 +431,4 @@ myGManageHook = composeAll (
     , className =? "Unity-2d-launcher" --> doFloat
     ])
 
-main = xmonad kmelsConfig 
---main = xmonad gnomeConfig { manageHook = myGkilManageHook }
 

@@ -1,20 +1,4 @@
 #!/bin/bash
 
-#invert Super_L and Alt_L
-xmodmap -e 'keycode 133=0xffe9' &
-xmodmap -e 'keycode  64=0xffeb' &
-
-#start favorite programs
-#emacs ~/Dropbox/org/kmels.org &
-#conkeror &
-#clementine &
-
-#terminator &
-#bitlbee -c ~/.bitlbee.conf &
-#xchat & 
-#skype &
-rm -rf ~/tmp/* &
-rm -rf ~/Downloads/* &
-
-#start favorite WM
+# cinnamon &
 exec /home/kmels/.cabal/bin/xmonad

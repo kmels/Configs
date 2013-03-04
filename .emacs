@@ -130,9 +130,9 @@
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+(load "~/.emacs.haskell-mode.init.el")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;NOTE: the three indendation modules are mutually exclusive (at most 1 can be used).
 
@@ -180,7 +180,7 @@
 ;****************************************(
 ;haskell-mode new stuff (TRUNK)
 ;****************************************
-(load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")
+;(load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")
 
 ;****************************************
 ; tools
@@ -197,13 +197,17 @@
 ;****************************************
 ;autocomplete
 ;****************************************
-(add-to-list 'load-path "~/.emacs.d/")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
-(ac-config-default)
+;(add-to-list 'load-path "~/.emacs.d/")
+;(require 'auto-complete-config)
+;(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+;(ac-config-default)
 
 ;****************************************
 ; hamlet-mode
 ;****************************************
-(add-to-list 'load-path "~/.emacs.d/meta-lang/hamlet-mode.el")
-(require 'hamlet-mode)
+;(add-to-list 'load-path "~/.emacs.d/meta-lang/hamlet-mode.el")
+;(require 'hamlet-mode)
+
+; email
+(load "~/.emacs.mu4e.conf.el")
+(put 'erase-buffer 'disabled nil)

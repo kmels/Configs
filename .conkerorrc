@@ -1,9 +1,9 @@
 /* Consider my xmodmappings 
  * i.e. consider Super_L as Meta key (see ~/.xmonad/xmonad.start)
  */
-modifiers.M = new modifier(
-    function (event) { return event.metaKey; },
-    function (event) { event.metaKey = true; });
+//modifiers.M = new modifier(
+//    function (event) { return event.metaKey; },
+//    function (event) { event.metaKey = true; });
 
 /* Allow extensions from untrusted sites */
 session_pref("xpinstall.whitelist.required", false);
