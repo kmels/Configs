@@ -20,7 +20,7 @@ import qualified XMonad.Actions.Submap as SM
 import qualified XMonad.Actions.Search as S
 
 -- Looks
-import XMonad.Hooks.DynamicLog -- dzen
+import XMonad.Hooks.DynamicLog (dzen) -- dzen
 
 -- | Initiates xmonad
 --main = replace >> (xmonad xConfig)
