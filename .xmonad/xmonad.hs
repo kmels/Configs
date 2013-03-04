@@ -1,40 +1,37 @@
 import XMonad
-import Data.Monoid
 import System.Exit
 import XMonad.Config.Gnome 
 import XMonad.Util.Replace
 
-import XMonad.Actions.Search
-import qualified XMonad.Actions.Submap as SM
-
+-- Data & Control
+import Data.Monoid
+import Control.Arrow ((&&&),first)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
-import XMonad.Hooks.ManageHelpers 
-import XMonad.Prompt
 
-import XMonad.Prompt.Input
-import XMonad.Prompt.RunOrRaise
-import XMonad.Prompt.Shell
-import XMonad.Prompt.Window
-import XMonad.Prompt
-import XMonad.Prompt.Ssh
-
+-- Actions
 import XMonad.Actions.CycleWS
+import XMonad.Actions.Search
+import XMonad.Prompt
+import XMonad.Prompt.Shell
+
+-- Looks
+import XMonad.Hooks.DynamicLog -- dzen
+
+import XMonad.Hooks.ManageHelpers 
+
 import XMonad.Util.EZConfig
 import qualified XMonad.Prompt as P
 import qualified XMonad.Actions.Submap as SM
 import qualified XMonad.Actions.Search as S
 import XMonad.Actions.GridSelect
 
-import Control.Arrow ((&&&),first)
-
 import XMonad.Actions.Launcher
 
 -- | Initiates xmonad
-main = do 
-  replace
-  xmonad xConfig
-  
+--main = replace >> (xmonad xConfig)
+main = replace >> (xmonad =<< dzen xConfig)
+   
 -- | XMonad Config
 xConfig = gnomeConfig{
   terminal           = "gnome-terminal",
@@ -209,7 +206,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
         
       -- Take screenshot and open its folder right away 
-    , ((modm  , xK_apostrophe), spawn "scrot -e 'mv $f ~/Desktop' && nautilus ~/Desktop" ) 
+    , ((modm  , xK_apostrophe), spawn "scrot -e 'mv $f ~/Desktop' && nemo ~/Desktop" ) 
 
       -- favorite browser
     , ((modm              , xK_b), spawn "~/bin/conkeror")
@@ -218,7 +215,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_e), spawn "emacs")
             
       --Search
-    , ((modm, xK_s), SM.submap $ searchEngineMap $ S.promptSearch P.defaultXPConfig) 
+    , ((modm, xK_s), SM.submap $ searchEngineMap $ S.promptSearch promptConfig) 
     , ((modm .|. shiftMask, xK_s), SM.submap $ searchEngineMap $ S.selectSearch)
       
       -- Grid select
@@ -412,18 +409,12 @@ myManageHook = composeAll [
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
  
--- Run xmonad with the settings you specify. No need to modify this.
---
---main = xmonad defaults
 searchEngineMap method = M.fromList $
        [ ((0, xK_g), method S.google)
        , ((0, xK_h), method S.hoogle)
        , ((0, xK_w), method S.wikipedia)
        , ((0, xK_y), method S.youtube)
        ]
-
---main = xmonad defaults 
-
 
 myGManageHook = composeAll (
     [ manageHook gnomeConfig
