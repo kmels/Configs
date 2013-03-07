@@ -1,55 +1,65 @@
-import XMonad
-import System.Exit
-import XMonad.Config.Gnome 
-import XMonad.Util.Replace
+import           XMonad
+import           System.Exit
+import           XMonad.Config.Gnome
+import           XMonad.Util.Replace
 
 -- Data & Control
-import Data.Monoid
-import Control.Arrow ((&&&),first)
+import           Data.Monoid
+import           Control.Arrow ((&&&),first)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 -- Actions
-import XMonad.Actions.CycleWS
-import XMonad.Actions.Launcher
-import XMonad.Actions.Search
-import XMonad.Prompt
-import XMonad.Prompt.Shell
+import           XMonad.Actions.CycleWS
+import           XMonad.Actions.Launcher
+import           XMonad.Actions.Search
+import           XMonad.Prompt
+import           XMonad.Prompt.Shell
 
 import qualified XMonad.Actions.Submap as SM
 import qualified XMonad.Actions.Search as S
 
--- Looks
-import XMonad.Hooks.DynamicLog (dzen) -- dzen
+-- Layout
+import           XMonad.Layout.Minimize
 
+-- Looks
+import           XMonad.Hooks.DynamicLog
+import XMonad.Hooks.FadeInactive
+import XMonad.Hooks.ManageDocks
+import           System.IO
+import           XMonad.Util.Run -- for spawnPipe and hPutstrLn
+  
 -- | Initiates xmonad
 --main = replace >> (xmonad xConfig)
-main = replace >> (xmonad =<< dzen xConfig)
-   
--- | XMonad Config
-xConfig = gnomeConfig{
-  terminal           = "gnome-terminal",
---  focusFollowsMouse  = False,
+main = do
+  replace
+  dzenLeftBar <- spawnPipe myXmonadBar
+  dzenRightBar <- spawnPipe myStatusBar
+  --(xmonad =<< dzen xConfig)
+  xmonad $ gnomeConfig{
+    terminal           = "gnome-terminal",
+    focusFollowsMouse  = False,
   
-  ------------------------------
-  --    mask     |    key       |
-  ------------------------------
-  --   mod1Mask  |  left alt    |
-  --   mod3Mask  |  right alt   |
-  --   mod4Mask  |  windows key |
-  ------------------------------
+    ------------------------------
+    --    mask     |    key       |
+    ------------------------------
+    --   mod1Mask  |  left alt    |
+    --   mod3Mask  |  right alt   |
+    --   mod4Mask  |  windows key |
+    ------------------------------
   modMask            = mod1Mask,
   workspaces         = ["free","help","code","shell","free2","communications","translate","browser","multimedia"],
   
   normalBorderColor  = "#242424",
-  focusedBorderColor = "#CC0000", 
-  borderWidth        = 2,
+  focusedBorderColor = "#ff0000", 
+  borderWidth        = 3,
   
   keys               = myKeys
   --mouseBindings      = myMouseBindings,
   
   -- hooks, layouts
-  --           layoutHook         = myLayout
+  , layoutHook         = myLayout
+  , logHook            = myLogHook dzenLeftBar >> fadeInactiveLogHook 0xdddddddd
   , manageHook         = myManageHook
   --handleEventHook    = myEventHook,
 }
@@ -164,16 +174,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((modm, xK_Up ), spawn "nemo ~"),
       
       -- Move focus to the next window
-      ((modm, xK_Tab ), windows W.focusDown),
-      
-      -- Move focus to the next window
+      ((modm, xK_Tab ), windows W.focusDown),      
       ((modm, xK_n ), windows W.focusDown),
  
       -- Move focus to the previous window
+      ((modm .|. shiftMask , xK_Tab ), windows W.focusUp ),
       ((modm, xK_p ), windows W.focusUp ),
  
-      -- Move focus to the master window
-      ((modm, xK_m ), windows W.focusMaster ),
+      -- Minimize 
+      ((modm, xK_m ), withFocused minimizeWindow ),
+      ((modm .|. shiftMask, xK_m ), sendMessage RestoreNextMinimizedWin),
  
       -- Swap the focused window and the master window
       ((modm, xK_Return), windows W.swapMaster), 
@@ -203,7 +213,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm  , xK_apostrophe), spawn "scrot -e 'mv $f ~/Desktop' && nemo ~/Desktop" ) 
 
       -- favorite browser
-    , ((modm              , xK_b), spawn "~/bin/conkeror")
+    , ((modm              , xK_c), spawn "/home/kmels/bin/conkeror")
       
       -- favorite editor
     , ((modm              , xK_e), spawn "emacs")
@@ -219,17 +229,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
     --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
+    , ((modm              , xK_b     ), sendMessage ToggleStruts)
       
       -- a basic CycleWS setup
       
       -- get the next workspace visible (and shift)
     , ((modm,               xK_Right),  nextWS)
-    , ((modm .|. shiftMask, xK_Right),  shiftToNext >> nextWS)  
+    , ((modm .|. shiftMask, xK_Right),  shiftToNext)  
       
       -- get the previous workspace visible
     , ((modm,               xK_Left),    prevWS)          
-    , ((modm .|. shiftMask, xK_Left),    shiftToPrev >> prevWS)            
+    , ((modm .|. shiftMask, xK_Left),    shiftToPrev)            
       
       -- toggle to the workspace displayed previously
     , ((modm,               xK_z),     toggleWS)
@@ -294,36 +304,6 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
  
         
-------------------------------------------------------------------------
--- Layouts:
- 
--- You can specify and transform your layouts by modifying these values.
--- If you change layout bindings be sure to use 'mod-shift-space' after
--- restarting (with 'mod-q') to reset your layout state to the new
--- defaults, as xmonad preserves your old layout settings by default.
---
--- * NOTE: XMonad.Hooks.EwmhDesktops users must remove the obsolete
--- ewmhDesktopsLayout modifier from layoutHook. It no longer exists.
--- Instead use the 'ewmh' function from that module to modify your
--- defaultConfig as a whole. (See also logHook, handleEventHook, and
--- startupHook ewmh notes.)
---
--- The available layouts.  Note that each layout is separated by |||,
--- which denotes layout choice.
---
-myLayout = tiled ||| Mirror tiled ||| Full
-  where
-    -- default tiling algorithm partitions the screen into two panes
-    tiled   = Tall nmaster delta ratio
- 
-    -- The default number of windows in the master pane
-    nmaster = 1
- 
-    -- Default proportion of screen occupied by master pane
-    ratio   = 1/2
- 
-    -- Percent of screen to increment by when resizing panes
-    delta   = 3/100
  
 ------------------------------------------------------------------------
 -- Window rules:
@@ -382,8 +362,26 @@ myManageHook = composeAll [
 -- It will add EWMH logHook actions to your custom log hook by
 -- combining it with ewmhDesktopsLogHook.
 --
---myLogHook = return ()
- 
+--myLogHook :: Handle -> X ()
+myLogHook h = dynamicLogWithPP $ defaultPP {
+  ppCurrent           =   dzenColor "#ebac54" "#1B1D1E" . pad
+  , ppVisible           =   dzenColor "white" "#1B1D1E" . pad
+  , ppHidden            =   dzenColor "white" "#1B1D1E" . pad
+  , ppHiddenNoWindows   =   dzenColor "#7b7b7b" "#1B1D1E" . pad
+  , ppUrgent            =   dzenColor "#ff0000" "#1B1D1E" . pad
+  , ppWsSep             =   " "
+  , ppSep               =   "  |  "
+  , ppLayout            =   dzenColor "#ebac54" "#1B1D1E" .
+                            (\x -> case x of
+                                "ResizableTall"        ->  "^i(" ++ myBitmapsDir ++ "/tall.xbm)"
+                                "Mirror ResizableTall" ->  "^i(" ++ myBitmapsDir ++ "/mtall.xbm)"
+                                "Full"                 ->  "^i(" ++ myBitmapsDir ++ "/full.xbm)"
+                                "Simple Float"         ->  "~"
+                                _                      ->  x ++ "?"
+                            )
+  , ppTitle             =   (" " ++) . dzenColor "white" "#1B1D1E" . dzenEscape
+  , ppOutput            =   hPutStrLn h
+  }
 ------------------------------------------------------------------------
 -- Startup hook
  
@@ -416,4 +414,38 @@ myGManageHook = composeAll (
     , className =? "Unity-2d-launcher" --> doFloat
     ])
 
+------------------------------------------------------------------------
+-- Layouts:
+ 
+-- You can specify and transform your layouts by modifying these values.
+-- If you change layout bindings be sure to use 'mod-shift-space' after
+-- restarting (with 'mod-q') to reset your layout state to the new
+-- defaults, as xmonad preserves your old layout settings by default.
+--
+-- * NOTE: XMonad.Hooks.EwmhDesktops users must remove the obsolete
+-- ewmhDesktopsLayout modifier from layoutHook. It no longer exists.
+-- Instead use the 'ewmh' function from that module to modify your
+-- defaultConfig as a whole. (See also logHook, handleEventHook, and
+-- startupHook ewmh notes.)
+--
+-- The available layouts.  Note that each layout is separated by |||,
+-- which denotes layout choice.
+--
+myLayout = avoidStruts $ tiled ||| minimize (Tall 1 (3/100) (1/2)) ||| tiled ||| Mirror tiled ||| Full
+  where
+    -- default tiling algorithm partitions the screen into two panes
+    tiled   = Tall nmaster delta ratio
+ 
+    -- The default number of windows in the master pane
+    nmaster = 1
+ 
+    -- Default proportion of screen occupied by master pane
+    ratio   = 1/2
+ 
+    -- Percent of screen to increment by when resizing panes
+    delta   = 3/100
 
+-- Dzen/Conky
+myXmonadBar = "dzen2 -x '1440' -y '0' -h '24' -w '640' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
+myStatusBar = "conky -c /home/kmels/.xmonad/.conky_dzen | dzen2 -x '2080' -w '1040' -h '24' -ta 'r' -bg '#1B1D1E' -fg '#FFFFFF' -y '0'"
+myBitmapsDir = "/home/kmels/.xmonad/bitmaps"
