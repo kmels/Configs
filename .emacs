@@ -130,7 +130,6 @@
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(load "~/.emacs.haskell-mode.init.el")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
@@ -207,7 +206,3 @@
 ;****************************************
 ;(add-to-list 'load-path "~/.emacs.d/meta-lang/hamlet-mode.el")
 ;(require 'hamlet-mode)
-
-; email
-(load "~/.emacs.mu4e.conf.el")
-(put 'erase-buffer 'disabled nil)
