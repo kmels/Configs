@@ -179,7 +179,7 @@
 ;****************************************(
 ;haskell-mode new stuff (TRUNK)
 ;****************************************
-;(load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")
+(load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")
 
 ;****************************************
 ; tools
