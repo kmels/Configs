@@ -14,6 +14,11 @@
 ;org-mode
 (global-set-key (kbd "<s-f1>") 'org-mobile-push)
 
+; programming
+(global-set-key (kbd "C-{") 'comment-region)
+(global-set-key (kbd "C-}") 'uncomment-region)
+
+
 ; FONT
 ;(set-default-font "-unknown-Inconsolata-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
 ;(set-default-font "-microsoft-Consolas-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
