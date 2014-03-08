@@ -1,3 +1,6 @@
+;; function to open this file
+(defun config-file-open () (find-file "~/GithubRepos/kmels-home-files/.emacs"))
+
 ; ****************************************
 ; general 
 ; ****************************************
