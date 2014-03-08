@@ -2,7 +2,7 @@
 ; general 
 ; ****************************************
 ; If some program uses a cabal binary (maybe cabal-dev for haskell-mode)
-(setenv "PATH" (concat "/home/kmels/.cabal/bin:" (getenv "PATH")))
+;TODO#WINDOWS (setenv "PATH" (concat "/home/kmels/.cabal/bin:" (getenv "PATH")))
 
 (global-set-key "\M-n" 'next-buffer)
 (global-set-key "\M-p" 'previous-buffer)
@@ -32,8 +32,8 @@
 ;; ***************************************
 ;; color-theme (make emacs look better)
 ;; ****************************************
-(add-to-list 'load-path "~/.emacs.d/common/color-theme-6.6.0")
-(load "~/.emacs.d/color-theme-tomorrow-night.el")
+(add-to-list 'load-path "~/GithubRepos/kmels-home-files/.emacs.d/common/color-theme-6.6.0")
+(load "~/GithubRepos/kmels-home-files/.emacs.d/color-theme-tomorrow-night.el")
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
@@ -43,11 +43,11 @@
 ;; ****************************************
 ;; org-mode 
 ;; ****************************************
-(setq load-path (cons "~/.emacs.d/common/org-7.8.03/lisp/" load-path))
-(setq load-path (cons "~/.emacs.d/common/org-7.8.03/contrib/lisp/" load-path))
+;TODO#WINDOWS (setq load-path (cons "~/.emacs.d/common/org-7.8.03/lisp/" load-path))
+;TODO#WINDOWS (setq load-path (cons "~/.emacs.d/common/org-7.8.03/contrib/lisp/" load-path))
     
-(require 'org)
-(require 'org-install)
+;TODO#WINDOWS (require 'org)
+;TODO#WINDOWS (require 'org-install)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
@@ -73,11 +73,11 @@
 
 
 ;; Location of org files
-(setq org-directory "~/Dropbox/org")
+;TODO#WINDOWS (setq org-directory "~/Dropbox/org")
 ;; MobileOrg, where to pull new notes
-(setq org-mobile-inbox-for-pull "~/Dropbox/org/flagged.org")
+;TODO#WINDOWS (setq org-mobile-inbox-for-pull "~/Dropbox/org/flagged.org")
 ;; MobileOrg, what to push
-(setq org-mobile-directory "~/Dropbox/MobileOrg")
+;TODO#WINDOWS (setq org-mobile-directory "~/Dropbox/MobileOrg")
 
 ;; ****************************************
 ;; ledger (accounting)
@@ -131,7 +131,7 @@
 ;; haskell-mode
 ;; https://github.com/haskell/haskell-mode
 ;; ****************************************
-(load "~/.emacs.d/prog-lang/haskell-mode/haskell-site-file")
+(load "~/GithubRepos/kmels-home-files/.emacs.d/prog-lang/haskell-mode/haskell-site-file")
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
@@ -169,7 +169,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(haskell-notify-p t)
- '(haskell-process-path-cabal-dev "/home/kmels/.cabal/bin/cabal-dev")
+;TODO#WINDOWS  '(haskell-process-path-cabal-dev "/home/kmels/.cabal/bin/cabal-dev")
  '(haskell-process-type (quote cabal-dev))
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save t)
@@ -184,7 +184,7 @@
 ;****************************************(
 ;haskell-mode new stuff (TRUNK)
 ;****************************************
-(load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")
+(load "~/GithubRepos/kmels-home-files/.emacs.d/prog-lang/haskell-mode/examples/init.el")
 
 ;****************************************
 ; tools
