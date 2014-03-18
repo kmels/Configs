@@ -1,0 +1,175 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00000000, pid=6596, tid=12180
+#
+# JRE version:  (7.0_51-b13) (build )
+# Java VM: Java HotSpot(TM) Client VM (24.51-b03 mixed mode windows-x86 )
+# Problematic frame:
+# C  0x00000000
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0220f800):  JavaThread "main" [_thread_in_Java, id=12180, stack(0x02450000,0x22450000)]
+
+siginfo: ExceptionCode=0xc0000005, ExceptionInformation=0x00000008 0x00000000
+
+Registers:
+EAX=0x00100000, EBX=0x4445d380, ECX=0x24450da0, EDX=0x00500001
+ESP=0x2244f160, EBP=0x2244f188, ESI=0x2244f164, EDI=0x2244f18c
+EIP=0x00000000, EFLAGS=0x00010216
+
+Top of Stack: (sp=0x2244f160)
+0x2244f160:   2245347b 24450da0 2244f168 44466ae3
+0x2244f170:   2244f18c 444b9970 00000000 44466b20
+0x2244f180:   2244f164 2244f190 2244f1ac 224503d7
+0x2244f190:   2244f1e0 2244f1bc 77c3ec22 00001f80
+0x2244f1a0:   22450372 0220f800 44466b20 2244f22c
+0x2244f1b0:   77c3f35a 2244f1e0 2244f2b4 0000000a
+0x2244f1c0:   44466b20 22459800 2244f2c4 00000000
+0x2244f1d0:   0220f800 0220f800 0220f800 00000004 
+
+Instructions: (pc=0x00000000)
+0xffffffe0:   
+
+
+Register to memory mapping:
+
+EAX=0x00100000 is an unknown value
+EBX=0x4445d380 is an oop
+{method} 
+ - klass: {other class}
+ECX=0x24450da0 is an oop
+java.lang.Class 
+ - klass: 'java/lang/Class'
+EDX=0x00500001 is an unknown value
+ESP=0x2244f160 is pointing into the stack for thread: 0x0220f800
+EBP=0x2244f188 is pointing into the stack for thread: 0x0220f800
+ESI=0x2244f164 is pointing into the stack for thread: 0x0220f800
+EDI=0x2244f18c is pointing into the stack for thread: 0x0220f800
+
+
+Stack: [0x02450000,0x22450000],  sp=0x2244f160,  free space=524284k
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+=>0x0220f800 JavaThread "main" [_thread_in_Java, id=12180, stack(0x02450000,0x22450000)]
+
+Other Threads:
+  0x021b2800 VMThread [stack: 0x4e4e0000,0x4e530000] [id=2756]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ def new generation   total 157248K, used 2795K [0x24450000, 0x2eef0000, 0x2eef0000)
+  eden space 139776K,   2% used [0x24450000, 0x2470ae88, 0x2ccd0000)
+  from space 17472K,   0% used [0x2ccd0000, 0x2ccd0000, 0x2dde0000)
+  to   space 17472K,   0% used [0x2dde0000, 0x2dde0000, 0x2eef0000)
+ tenured generation   total 349568K, used 0K [0x2eef0000, 0x44450000, 0x44450000)
+   the space 349568K,   0% used [0x2eef0000, 0x2eef0000, 0x2eef0200, 0x44450000)
+ compacting perm gen  total 131072K, used 501K [0x44450000, 0x4c450000, 0x4c450000)
+   the space 131072K,   0% used [0x44450000, 0x444cd660, 0x444cd800, 0x4c450000)
+No shared spaces configured.
+
+Card table byte_map: [0x4e250000,0x4e3a0000] byte_map_base: 0x4e12dd80
+
+Polling page: 0x001a0000
+
+Code Cache  [0x22450000, 0x22498000, 0x24450000)
+ total_blobs=40 nmethods=0 adapters=19 free_code_cache=32498Kb largest_free_block=33278592
+
+Compilation events (0 events):
+No events
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.128 loading class 0x02127638 done
+Event: 0.128 loading class 0x02127618 done
+Event: 0.128 loading class 0x02132548
+Event: 0.128 loading class 0x02132548 done
+Event: 0.128 loading class 0x0212f6d8
+Event: 0.129 loading class 0x0212f6d8 done
+Event: 0.129 loading class 0x02136560
+Event: 0.129 loading class 0x02136560 done
+Event: 0.129 loading class 0x02136588
+Event: 0.129 loading class 0x02136588 done
+
+
+Dynamic libraries:
+0x00260000 - 0x0028f000 	C:\Windows\SysWOW64\java.exe
+0x77910000 - 0x77a90000 	C:\Windows\SysWOW64\ntdll.dll
+0x75700000 - 0x75800000 	C:\Windows\syswow64\kernel32.dll
+0x75e30000 - 0x75e76000 	C:\Windows\syswow64\KERNELBASE.dll
+0x75ab0000 - 0x75b50000 	C:\Windows\syswow64\ADVAPI32.dll
+0x75890000 - 0x7593c000 	C:\Windows\syswow64\msvcrt.dll
+0x76400000 - 0x76419000 	C:\Windows\SysWOW64\sechost.dll
+0x77280000 - 0x77370000 	C:\Windows\syswow64\RPCRT4.dll
+0x75480000 - 0x754e0000 	C:\Windows\syswow64\SspiCli.dll
+0x75470000 - 0x7547c000 	C:\Windows\syswow64\CRYPTBASE.dll
+0x75570000 - 0x75670000 	C:\Windows\syswow64\USER32.dll
+0x75670000 - 0x75700000 	C:\Windows\syswow64\GDI32.dll
+0x76420000 - 0x7642a000 	C:\Windows\syswow64\LPK.dll
+0x76430000 - 0x764cd000 	C:\Windows\syswow64\USP10.dll
+0x739a0000 - 0x73b3e000 	C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16385_none_421189da2b7fabfc\COMCTL32.dll
+0x75f80000 - 0x75fd7000 	C:\Windows\syswow64\SHLWAPI.dll
+0x75940000 - 0x759a0000 	C:\Windows\system32\IMM32.DLL
+0x759e0000 - 0x75aac000 	C:\Windows\syswow64\MSCTF.dll
+0x75300000 - 0x75335000 	C:\Windows\SysWOW64\nvinit.dll
+0x51d80000 - 0x51e3f000 	C:\Program Files (x86)\Java\jre7\bin\msvcr100.dll
+0x77b00000 - 0x77e80000 	C:\Program Files (x86)\Java\jre7\bin\client\jvm.dll
+0x72f00000 - 0x72f07000 	C:\Windows\SysWOW64\WSOCK32.dll
+0x75d60000 - 0x75d95000 	C:\Windows\syswow64\WS2_32.dll
+0x75b50000 - 0x75b56000 	C:\Windows\syswow64\NSI.dll
+0x73730000 - 0x73762000 	C:\Windows\SysWOW64\WINMM.dll
+0x759d0000 - 0x759d5000 	C:\Windows\syswow64\PSAPI.DLL
+0x6f6e0000 - 0x6f6ec000 	C:\Program Files (x86)\Java\jre7\bin\verify.dll
+0x63b10000 - 0x63b30000 	C:\Program Files (x86)\Java\jre7\bin\java.dll
+0x61600000 - 0x61613000 	C:\Program Files (x86)\Java\jre7\bin\zip.dll
+0x73520000 - 0x7360b000 	C:\Windows\SysWOW64\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Xbootclasspath/a:c:\Users\kmels\AppData\Roaming\GithubRepos\kmels-home-files\.emacs.d\ensime_2.10.0-RC3-0.9.8.2\bin\\..\scala-library.jar;c:\Users\kmels\AppData\Roaming\GithubRepos\kmels-home-files\.emacs.d\ensime_2.10.0-RC3-0.9.8.2\bin\\..\scala-reflect.jar;c:\Users\kmels\AppData\Roaming\GithubRepos\kmels-home-files\.emacs.d\ensime_2.10.0-RC3-0.9.8.2\bin\\..\scala-compiler.jar;c:\Users\kmels\AppData\Roaming\GithubRepos\kmels-home-files\.emacs.d\ensime_2.10.0-RC3-0.9.8.2\bin\\..\scala-actors.jar -Xms512M -Xmx512M -XX:PermSize=128m -Xss512M -Dfile.encoding=UTF-8 
+java_command: org.ensime.server.Server
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.7.0_45
+PATH=C:\Program Files (x86)\Git\git-cheetah\..\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x64;C:\Program Files (x86)\nodejs\;C:\Program Files (x86)\MySQL\MySQL Utilities 1.3.5\;C:\Program Files\TortoiseHg\;C:\Program Files (x86)\Git\cmd;C:\HashiCorp\Vagrant\bin;C:\Program Files (x86)\Groovy\Groovy-2.2.1\bin;C:\Program Files (x86)\MiKTeX 2.9\miktex\bin\;C:\Program Files (x86)\Subversion\bin;C:\bin\src\mongodb-win32-x86_64-2008plus-2.4.9\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x64;C:\Program Files (x86)\nodejs\;C:\Program Files (x86)\MySQL\MySQL Utilities 1.3.5\;C:\Program Files\TortoiseHg\;C:\Program Files (x86)\Git\cmd;C:\HashiCorp\Vagrant\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\kmels\AppData\Roaming\npm;C:\viking-util;C:\bin\src\gradle-1.7-bin\gradle-1.7\bin;C:\bin;C:\Program Files\Apache Software Foundation\apache-maven-3.1.1\bin;C:\bin\src\ghc-7.6.3\bin;C:\Program Files\Apache Software Foundation\apache-ant-1.9.3\bin;C:\Program Files (x86)\Groovy\Groovy-2.2.1\bin;C:\Program Files\Oracle\VirtualBox
+USERNAME=kmels
+SHELL=C:/bin/src/emacs-24.3-bin-i386/emacs-24.3/bin/cmdproxy.exe
+DISPLAY=w32
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 , 64 bit Build 7600 
+
+CPU:total 8 (4 cores per cpu, 2 threads per core) family 6 model 58 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, aes, erms, ht, tsc, tscinvbit, tscinv
+
+Memory: 4k page, physical 7925932k(2737436k free), swap 15849968k(7032756k free)
+
+vm_info: Java HotSpot(TM) Client VM (24.51-b03) for windows-x86 JRE (1.7.0_51-b13), built on Dec 18 2013 19:09:58 by "java_re" with unknown MS VC++:1600
+
+time: Tue Mar 18 00:10:12 2014
+elapsed time: 0 seconds
+

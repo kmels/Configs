@@ -176,7 +176,8 @@
  '(haskell-process-type (quote cabal-dev))
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save t)
- '(org-agenda-files (quote ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org"))))
+;TODO#WINDOWS '(org-agenda-files (quote ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org")))
+)
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -214,3 +215,22 @@
 ;****************************************
 ;(add-to-list 'load-path "~/.emacs.d/meta-lang/hamlet-mode.el")
 ;(require 'hamlet-mode)
+
+;********************************************************************************
+; scala-mode
+;********************************************************************************
+(require 'package)
+(add-to-list 'package-archives
+'("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+(unless (package-installed-p 'scala-mode2)
+(package-refresh-contents) (package-install 'scala-mode2))
+
+;ensime
+(add-to-list 'load-path "~/GithubRepos/kmels-home-files/.emacs.d/ensime_2.10.0-RC3-0.9.8.2/elisp/")
+(require 'ensime)
+
+;; This step causes the ensime-mode to be started whenever
+;; scala-mode is started for a buffer. You may have to customize this step
+;; if you're not using the standard scala mode.
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
