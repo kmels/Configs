@@ -1,6 +1,13 @@
 ;; function to open this file
 (defun config-file-open () (find-file "~/GithubRepos/kmels-home-files/.emacs"))
 
+;; opens a cygwin shell
+(defun cygwin-shell ()
+  "Run cygwin bash in shell mode."
+  (interactive)
+  (let ((explicit-shell-file-name "C:/cygwin/bin/bash"))
+    (call-interactively 'shell)))
+
 ; ****************************************
 ; general 
 ; ****************************************
