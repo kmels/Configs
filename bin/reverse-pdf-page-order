@@ -1,0 +1,22 @@
+#!/usr/bin/python
+
+from pyPdf import PdfFileWriter, PdfFileReader
+import sys
+
+output_pdf = PdfFileWriter()
+
+if (len(sys.argv) != 3):
+    print("Usage: rever-pdf-page-order input.pdf output.pdf" )
+    print(len(sys.argv))
+else:
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+
+    with open(input_file, 'rb') as readfile:
+        input_pdf = PdfFileReader(readfile)
+        total_pages = input_pdf.getNumPages()
+        for page in xrange(total_pages - 1, -1, -1):
+            output_pdf.addPage(input_pdf.getPage(page))
+            with open(output_file, "wb") as writefile:
+                output_pdf.write(writefile)
+

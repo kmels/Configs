@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# cinnamon &
+exec /home/kmels/.cabal/bin/xmonad
