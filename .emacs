@@ -1,3 +1,21 @@
+;****************************************
+;utils 
+;(Copyright © 2014 - Bozhidar Batsov)
+;****************************************
+(defun sudo-edit (&optional arg)
+  "Edit currently visited file as root.
+
+With a prefix ARG prompt for a file to visit.
+Will also prompt for a file to visit if current
+buffer is not visiting a file."
+  (interactive "P")
+  (if (or arg (not buffer-file-name))
+      (find-file (concat "/sudo:root@localhost:"
+                         (ido-read-file-name "Find file(as root): ")))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+(global-set-key (kbd "C-x C-r") 'sudo-edit)
+
 ; ****************************************
 ; general 
 ; ****************************************
@@ -211,3 +229,15 @@
 ;****************************************
 ;(add-to-list 'load-path "~/.emacs.d/meta-lang/hamlet-mode.el")
 ;(require 'hamlet-mode)
+
+
+;****************************************
+;markdown-mode
+;****************************************
+(add-to-list 'load-path "~/.emacs.d/meta-lang/markdown-mode.el")
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
