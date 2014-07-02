@@ -27,4 +27,5 @@ if [ -d "$HOME/.cabal/bin" ] ; then
     PATH="$HOME/.cabal/bin:$PATH"
 fi
 
-
+# fix ghc-7.8.2
+export LANG=C.UTF-8
