@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: util-bridges-6.1.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.liferay.portal/util-bridges/6.1.1/7d6b771df37b74f1ec8b0088be796a7199700b3a/util-bridges-6.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.liferay.portal/util-bridges/6.1.1/81af6542b5eaf4d63af866359cf72fb35385c441/util-bridges-6.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

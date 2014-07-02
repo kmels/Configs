@@ -27,4 +27,12 @@ if [ -d "$HOME/.cabal/bin" ] ; then
     PATH="$HOME/.cabal/bin:$PATH"
 fi
 
+# set PATH so it includes my directory of binaries
+if [ -d "$HOME/Binarios" ] ; then
+    PATH="$HOME/Binarios:$PATH"
+fi
 
+JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
+
+# xmonad please play well with java
+export _JAVA_AWT_WM_NONREPARENTING=1

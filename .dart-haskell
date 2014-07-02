@@ -1,0 +1,42 @@
+################################################################################
+# NOTE:
+# data Bool = true|on|1|false|off|false
+
+[primitive types]
+min_int_bound = -100
+max_int_bound = 100
+double_min = order of 10^2
+double_max = order of 10^2
+
+[data structures]
+size = order of 10^2
+
+[interpreter]
+#path to the file that contains the module you want to interpret or test :: FilePath
+#file =
+
+#name of the function to evaluate, defined within the module in $file :: String
+#evaluate_function =
+
+#name of the function to test, defined within the module in $file :: String
+#test_function =
+
+[testing]
+#number of tests per test function
+number_of_tests = 1
+
+# Print debug messages :: Bool
+debug = off
+# Be verbose: prints environment, loaded modules, etc.
+verbose = off
+
+# Maximum amount of seconds permitted to a computation in order to finish (includes tests and evaluations)
+timeout_seconds = 5
+
+################################################################################
+# Debugging the interpreter
+show_heap = off
+show_expressions = off
+show_subexpressions = off
+watch_reduction = off
+watch_test = off

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: bonecp-0.7.1.RELEASE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jolbox/bonecp/0.7.1.RELEASE/83a491a03db1222b33d4e55b54e8f5702e280a0e/bonecp-0.7.1.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jolbox/bonecp/0.7.1.RELEASE/ba6ad562d67fd85e06ab796462a16aad1843967f/bonecp-0.7.1.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

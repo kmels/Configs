@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: util-taglib-6.1.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.liferay.portal/util-taglib/6.1.1/ab1642f147808b116d615fe9da1ca5af9c35e56f/util-taglib-6.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.liferay.portal/util-taglib/6.1.1/dfa16b54afc4017ae518e3fa0127c08234ee9959/util-taglib-6.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

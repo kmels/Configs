@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: jsp-api-2.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.servlet.jsp/jsp-api/2.0/e749de55a88f61457866d80da527f5a01bc9c6f3/jsp-api-2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.servlet.jsp/jsp-api/2.0/eaf5481b36a8ca0bc28454aa8ac246c5ccc7a9e/jsp-api-2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

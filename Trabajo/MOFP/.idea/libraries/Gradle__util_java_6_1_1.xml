@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: util-java-6.1.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.liferay.portal/util-java/6.1.1/62e75ffc2885527fc7892dad968174e76aaee0f6/util-java-6.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.liferay.portal/util-java/6.1.1/f215ffca8cdb895cb3f898f1d00c2eb0e6f514a/util-java-6.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
