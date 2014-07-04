@@ -22,6 +22,9 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 
+if [ -d "$HOME/bin" ] ; then PATH="$HOME/Binarios:$PATH" 
+fi
+
 # set PATH so it includes cabal's bin
 if [ -d "$HOME/.cabal/bin" ] ; then
     PATH="$HOME/.cabal/bin:$PATH"
@@ -29,3 +32,7 @@ fi
 
 # fix ghc-7.8.2
 export LANG=C.UTF-8
+
+# fix java <+> xmonad
+export _JAVA_AWT_WM_NONREPARENTING=1
+
