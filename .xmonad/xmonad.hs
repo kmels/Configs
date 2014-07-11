@@ -452,3 +452,4 @@ myLayout = avoidStruts $ tiled ||| minimize (Tall 1 (3/100) (1/2)) ||| tiled |||
 myXmonadBar = "dzen2 -x '1440' -y '0' -h '24' -w '640' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
 myStatusBar = "conky -c /home/kmels/.xmonad/.conky_dzen | dzen2 -x '2080' -w '1040' -h '24' -ta 'r' -bg '#1B1D1E' -fg '#FFFFFF' -y '0'"
 myBitmapsDir = "/home/kmels/.xmonad/bitmaps"
+

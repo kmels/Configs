@@ -52,6 +52,7 @@ buffer is not visiting a file."
 ;; ****************************************
 (add-to-list 'load-path "~/.emacs.d/common/color-theme-6.6.0")
 (load "~/.emacs.d/color-theme-tomorrow-night.el")
+(load "~/.emacs.d/common/color-theme-6.6.0/themes/color-theme-solarized.el")
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
@@ -130,6 +131,28 @@ buffer is not visiting a file."
 ;           '(lambda ()
 ;              (yas/minor-mode-on)))
 
+;****************************************
+; MELPA (Milkypostman’s Emacs Lisp Package Archive)
+;****************************************
+(require 'package)
+(add-to-list 'package-archives
+         '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+; ****************************************
+; ensime
+; ****************************************
+
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+; 
 ;; ;****************************************
 ;; ; Nxhtml-mode (DEACTIVATED)
 ;; ;****************************************
@@ -240,4 +263,13 @@ buffer is not visiting a file."
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+
+;****************************************
+;php
+;****************************************
+(add-to-list 'load-path "/home/kmels/.emacs.d/prog-lang/")
+(require 'php-mode)
+
+
 
