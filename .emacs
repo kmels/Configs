@@ -52,11 +52,12 @@ buffer is not visiting a file."
 ;; ****************************************
 (add-to-list 'load-path "~/.emacs.d/common/color-theme-6.6.0")
 (load "~/.emacs.d/color-theme-tomorrow-night.el")
+(load "~/.emacs.d/common/color-theme-6.6.0/themes/color-theme-solarized.el")
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-kmels)))
+     (color-theme-solarized-light)))
 
 ;; ****************************************
 ;; org-mode 
@@ -241,3 +242,9 @@ buffer is not visiting a file."
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+
+;****************************************
+;php
+;****************************************
+(add-to-list 'load-path "/home/kmels/.emacs.d/prog-lang/php-mode.el")
+(require 'php-mode)

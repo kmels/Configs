@@ -29,12 +29,15 @@ import XMonad.Hooks.ManageDocks
 import           System.IO
 import           XMonad.Util.Run -- for spawnPipe and hPutstrLn
   
+
+-- | Programs used: dmenu, dzen2
+
 -- | Initiates xmonad
 --main = replace >> (xmonad xConfig)
 main = do
   replace
   dzenLeftBar <- spawnPipe myXmonadBar
-  dzenRightBar <- spawnPipe myStatusBar
+  --dzenRightBar <- spawnPipe myStatusBar
   --(xmonad =<< dzen xConfig)
   xmonad $ gnomeConfig{
     terminal           = "gnome-terminal",
@@ -47,8 +50,8 @@ main = do
     --   mod3Mask  |  right alt   |
     --   mod4Mask  |  windows key |
     ------------------------------
-  modMask            = mod1Mask,
-  workspaces         = ["free","help","code","shell","free2","communications","translate","browser","multimedia"],
+  modMask            = mod4Mask,
+  workspaces         = ["lopezayerdi","bitpaga","dart-haskell","shell","free2","communications","translate","browser","multimedia"],
   
   normalBorderColor  = "#242424",
   focusedBorderColor = "#ff0000", 
@@ -171,7 +174,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((modm, xK_j ), refresh),
         
       -- File Explorer
-      ((modm, xK_Up ), spawn "nemo ~"),
+      ((modm, xK_Up ), spawn "nautilus ~"),
       
       -- Move focus to the next window
       ((modm, xK_Tab ), windows W.focusDown),      
@@ -449,3 +452,4 @@ myLayout = avoidStruts $ tiled ||| minimize (Tall 1 (3/100) (1/2)) ||| tiled |||
 myXmonadBar = "dzen2 -x '1440' -y '0' -h '24' -w '640' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
 myStatusBar = "conky -c /home/kmels/.xmonad/.conky_dzen | dzen2 -x '2080' -w '1040' -h '24' -ta 'r' -bg '#1B1D1E' -fg '#FFFFFF' -y '0'"
 myBitmapsDir = "/home/kmels/.xmonad/bitmaps"
+
