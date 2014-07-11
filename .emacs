@@ -57,7 +57,7 @@ buffer is not visiting a file."
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-solarized-light)))
+     (color-theme-kmels)))
 
 ;; ****************************************
 ;; org-mode 
@@ -131,6 +131,28 @@ buffer is not visiting a file."
 ;           '(lambda ()
 ;              (yas/minor-mode-on)))
 
+;****************************************
+; MELPA (Milkypostman’s Emacs Lisp Package Archive)
+;****************************************
+(require 'package)
+(add-to-list 'package-archives
+         '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+; ****************************************
+; ensime
+; ****************************************
+
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+; 
 ;; ;****************************************
 ;; ; Nxhtml-mode (DEACTIVATED)
 ;; ;****************************************
@@ -246,5 +268,8 @@ buffer is not visiting a file."
 ;****************************************
 ;php
 ;****************************************
-(add-to-list 'load-path "/home/kmels/.emacs.d/prog-lang/php-mode.el")
+(add-to-list 'load-path "/home/kmels/.emacs.d/prog-lang/")
 (require 'php-mode)
+
+
+
