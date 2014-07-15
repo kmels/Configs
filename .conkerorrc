@@ -8,6 +8,34 @@
 /* Allow extensions from untrusted sites */
 session_pref("xpinstall.whitelist.required", false);
 
+/*****************************************
+ * jQuery 1.3.2
+ *****************************************
+Load jquery */
+function install_jquery(d) {
+    var script_el = d.createElementNS(XHTML_NS, "script");
+    script_el.setAttribute("language", "javascript");
+    script_el.setAttribute("type", "text/javascript");
+    script_el.setAttribute("src", "http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js");
+    d.body.appendChild(script_el);
+}
+
+function jquery_this_doc(d, js_code) {
+    install_jquery(d);
+    var script_el = d.createElementNS(XHTML_NS, "script");
+    script_el.textContent = js_code;
+    d.body.appendChild(script_el);
+}
+
+interactive("jquery-here",
+            "load jquery.js into this page, then your command",
+            function(I) {
+                jquery_this_doc(I.buffer.document, (yield I.minibuffer.read($prompt = "jq: ", $history = "jquery-here")));
+                // Providing a $history is what allows editing/replay of earlier commands
+            });
+
+
+
 /****************************************
 *               Webjumps begin
 *****************************************/
@@ -113,4 +141,5 @@ interactive("firebug", "open firebug lite", function (I) {
     script.setAttribute('src', firebug_url);
     script.setAttribute('onload', 'firebug.init();');
     doc.body.appendChild(script);
-});
+}); 
+
