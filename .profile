@@ -31,14 +31,14 @@ if [ -d "$HOME/.cabal/bin" ] ; then
 fi
 
 
-JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
+export JDK_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
 
 # fix ghc-7.8.2
 export LANG=C.UTF-8
 
 # fix java <+> xmonad
 export _JAVA_AWT_WM_NONREPARENTING=1
->>>>>>> wheezy
 
 # xmonad please play well with java
 export _JAVA_AWT_WM_NONREPARENTING=1
