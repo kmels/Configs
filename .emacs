@@ -20,7 +20,10 @@ buffer is not visiting a file."
 ; general 
 ; ****************************************
 ; If some program uses a cabal binary (maybe cabal-dev for haskell-mode)
-(setenv "PATH" (concat "/home/kmels/.cabal/bin:" (getenv "PATH")))
+(setenv "PATH" (concat "/home/kmels/.cabal/bin:" 
+                       (getenv "PATH")))
+
+(setenv "LANG" "C.UTF-8")
 
 (global-set-key "\M-n" 'next-buffer)
 (global-set-key "\M-p" 'previous-buffer)

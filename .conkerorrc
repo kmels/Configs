@@ -27,7 +27,7 @@ function jquery_this_doc(d, js_code) {
     d.body.appendChild(script_el);
 }
 
-interactive("jquery-here",
+interactive("eval-jquery",
             "load jquery.js into this page, then your command",
             function(I) {
                 jquery_this_doc(I.buffer.document, (yield I.minibuffer.read($prompt = "jq: ", $history = "jquery-here")));

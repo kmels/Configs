@@ -30,7 +30,6 @@ if [ -d "$HOME/.cabal/bin" ] ; then
     PATH="$HOME/.cabal/bin:$PATH"
 fi
 
-
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
 export JDK_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
 

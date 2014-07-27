@@ -10,6 +10,8 @@ double_max = order of 10^2
 
 [data structures]
 size = order of 10^2
+data_max_size = 20
+data_min_size = 10
 
 [interpreter]
 #path to the file that contains the module you want to interpret or test :: FilePath
@@ -31,7 +33,7 @@ debug = off
 verbose = off
 
 # Maximum amount of seconds permitted to a computation in order to finish (includes tests and evaluations)
-timeout_seconds = 5
+timeout_seconds = 10
 
 ################################################################################
 # Debugging the interpreter
