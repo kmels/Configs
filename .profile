@@ -41,3 +41,9 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # xmonad please play well with java
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+# sbt size
+export SBT_OPTS="-Xmx4036M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=2G -Xss2M  -Duser.timezone=America/Guatemala"
+
+
+
