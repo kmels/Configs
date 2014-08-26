@@ -33,7 +33,7 @@ debug = off
 verbose = off
 
 # Maximum amount of seconds permitted to a computation in order to finish (includes tests and evaluations)
-timeout_seconds = 10
+max_time_per_function = 15
 
 ################################################################################
 # Debugging the interpreter

@@ -19,12 +19,7 @@ buffer is not visiting a file."
 ; ****************************************
 ; general 
 ; ****************************************
-; If some program uses a cabal binary (maybe cabal-dev for haskell-mode)
-(setenv "PATH" (concat "/home/kmels/.cabal/bin:" 
-                       (getenv "PATH")))
-
 (setenv "LANG" "C.UTF-8")
-
 (global-set-key "\M-n" 'next-buffer)
 (global-set-key "\M-p" 'previous-buffer)
 (global-set-key (kbd "<f2> RET") 'make-frame-command)
@@ -172,15 +167,55 @@ buffer is not visiting a file."
 ;(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 
 ;; ****************************************
-;; haskell-mode
-;; https://github.com/haskell/haskell-mode
+;; haskell-mode, ghc-mod, stylish-haskell
+;; https://github.com/serras/emacs-haskell-tutorial/blob/master/tutorial.md 
 ;; ****************************************
-(load "~/.emacs.d/prog-lang/haskell-mode/haskell-site-file")
-
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+;(add-hook 'haskell-mode-hook 'structured-haskell-mode)
+
+(eval-after-load 'haskell-mode
+          '(define-key haskell-mode-map [f8] 'haskell-navigate-imports))
+(setenv "PATH" (concat "~/.cabal/bin:" (getenv "PATH")))
+(add-to-list 'exec-path "~/.cabal/bin")
+(custom-set-variables '(haskell-tags-on-save t))
+
+(custom-set-variables
+  '(haskell-process-suggest-remove-import-lines t)
+  '(haskell-process-auto-import-loaded-modules t)
+  '(haskell-process-log t))
+
+(eval-after-load 'haskell-mode '(progn
+  (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
+  (define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
+  (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
+  (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
+  (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
+  (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)
+  (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)))
+
+(eval-after-load 'haskell-cabal '(progn
+  (define-key haskell-cabal-mode-map (kbd "C-`") 'haskell-interactive-bring)
+  (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-ode-clear)
+  (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
+  (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)))
+
+(custom-set-variables '(haskell-process-type 'cabal-repl))
+
+;; initialize ghc-mod when opening haskell files
+(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-debug "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+
+;; haskell autocompletion
+(require 'company)
+(add-hook 'haskell-mode-hook 'company-mode)
+(add-to-list 'company-backends 'company-ghc)
+(custom-set-variables '(company-ghc-show-info t))
+
+;; The first one is rainbow-delimiters. Its goal is very simple: show each level of parenthesis or braces in a different color. In that way, you can easily spot until from point some expression scopes. Furthermore, if the delimiters do not match, the extra ones are shown in a warning, red col
+(require 'rainbow-delimiters)
+(global-rainbow-delimiters-mode)
 
 ;NOTE: the three indendation modules are mutually exclusive (at most 1 can be used).
 
@@ -212,11 +247,6 @@ buffer is not visiting a file."
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(haskell-notify-p t)
- '(haskell-process-path-cabal-dev "/home/kmels/.cabal/bin/cabal-dev")
- '(haskell-process-type (quote cabal-dev))
- '(haskell-stylish-on-save nil)
- '(haskell-tags-on-save t)
  '(org-agenda-files (quote ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org"))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -224,11 +254,6 @@ buffer is not visiting a file."
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
-
-;****************************************(
-;haskell-mode new stuff (TRUNK)
-;****************************************
-(load "~/.emacs.d/prog-lang/haskell-mode/examples/init.el")
 
 ;****************************************
 ; tools
@@ -273,6 +298,4 @@ buffer is not visiting a file."
 ;****************************************
 (add-to-list 'load-path "/home/kmels/.emacs.d/prog-lang/")
 (require 'php-mode)
-
-
 

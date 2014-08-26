@@ -43,7 +43,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # sbt size
-export SBT_OPTS="-Xmx4036M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=2G -Xss2M  -Duser.timezone=America/Guatemala"
+export SBT_OPTS="-Xmx6036M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=3556m -Xss2M  -Duser.timezone=America/Guatemala"
 
 
 
