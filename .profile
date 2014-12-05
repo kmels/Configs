@@ -45,5 +45,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # sbt size
 export SBT_OPTS="-Xmx6036M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=3556m -Xss2M  -Duser.timezone=America/Guatemala"
 
-
+# binary links: sbt, all caball, scala 2.10
+export PATH=~/bin/sbt/bin:$PATH:~/.cabal/bin/:~/bin/scala-2.10.3/bin
 
