@@ -1,0 +1,3 @@
+[submodule "stack-exchange"]
+	path = .emacs.d/sx.el
+	url = git@github.com:vermiculus/sx.el.git
