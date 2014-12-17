@@ -1,3 +1,6 @@
 [submodule "stack-exchange"]
 	path = .emacs.d/sx.el
 	url = git@github.com:vermiculus/sx.el.git
+[submodule "conkeror"]
+	path = bin/conkeror
+	url = git://repo.or.cz/conkeror.git
