@@ -4,3 +4,9 @@
 [submodule "conkeror"]
 	path = bin/conkeror
 	url = git://repo.or.cz/conkeror.git
+[submodule "fsharp"]
+	path = bin/fsharp
+	url = git@github.com:fsharp/fsharp.git
+[submodule "fsharpbinding"]
+	path = .emacs.d/prog-lang/fsharpbinding
+	url = git@github.com:fsharp/fsharpbinding.git
