@@ -10,3 +10,6 @@
 [submodule "fsharpbinding"]
 	path = .emacs.d/prog-lang/fsharpbinding
 	url = git@github.com:fsharp/fsharpbinding.git
+[submodule "bin/monodevelop"]
+	path = bin/monodevelop
+	url = git@github.com:mono/monodevelop.git
