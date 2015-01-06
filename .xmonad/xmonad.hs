@@ -29,6 +29,8 @@ import XMonad.Hooks.ManageDocks
 import           System.IO
 import           XMonad.Util.Run -- for spawnPipe and hPutstrLn
   
+-- Environment
+import XMonad.Hooks.SetWMName
 
 -- | Programs used: dmenu, dzen2
 
@@ -51,7 +53,8 @@ main = do
     --   mod4Mask  |  windows key |
     ------------------------------
   modMask            = mod4Mask,
-  workspaces         = ["lopezayerdi","bitpaga","dart-haskell","shell","free2","communications","translate","browser","multimedia"],
+  workspaces         = ["1","bitpaga","dart-haskell","shell","5","6","translate","browser","9"],
+  startupHook = myStartupHook,
   
   normalBorderColor  = "#242424",
   focusedBorderColor = "#ff0000", 
@@ -62,7 +65,6 @@ main = do
   
   -- hooks, layouts
   , layoutHook         = myLayout
-  , logHook            = myLogHook dzenLeftBar >> fadeInactiveLogHook 0xdddddddd
   , manageHook         = myManageHook
   --handleEventHook    = myEventHook,
 }
@@ -355,36 +357,8 @@ myManageHook = composeAll [
  
 ------------------------------------------------------------------------
 -- Status bars and logging
- 
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'XMonad.Hooks.DynamicLog' extension for examples.
---
---
--- * NOTE: EwmhDesktops users should use the 'ewmh' function from
--- XMonad.Hooks.EwmhDesktops to modify their defaultConfig as a whole.
--- It will add EWMH logHook actions to your custom log hook by
--- combining it with ewmhDesktopsLogHook.
---
 --myLogHook :: Handle -> X ()
-myLogHook h = dynamicLogWithPP $ defaultPP {
-  ppCurrent           =   dzenColor "#ebac54" "#1B1D1E" . pad
-  , ppVisible           =   dzenColor "white" "#1B1D1E" . pad
-  , ppHidden            =   dzenColor "white" "#1B1D1E" . pad
-  , ppHiddenNoWindows   =   dzenColor "#7b7b7b" "#1B1D1E" . pad
-  , ppUrgent            =   dzenColor "#ff0000" "#1B1D1E" . pad
-  , ppWsSep             =   " "
-  , ppSep               =   "  |  "
-  , ppLayout            =   dzenColor "#ebac54" "#1B1D1E" .
-                            (\x -> case x of
-                                "ResizableTall"        ->  "^i(" ++ myBitmapsDir ++ "/tall.xbm)"
-                                "Mirror ResizableTall" ->  "^i(" ++ myBitmapsDir ++ "/mtall.xbm)"
-                                "Full"                 ->  "^i(" ++ myBitmapsDir ++ "/full.xbm)"
-                                "Simple Float"         ->  "~"
-                                _                      ->  x ++ "?"
-                            )
-  , ppTitle             =   (" " ++) . dzenColor "white" "#1B1D1E" . dzenEscape
-  , ppOutput            =   hPutStrLn h
-  }
+
 ------------------------------------------------------------------------
 -- Startup hook
  
@@ -399,7 +373,7 @@ myLogHook h = dynamicLogWithPP $ defaultPP {
 -- It will add initialization of EWMH support to your custom startup
 -- hook by combining it with ewmhDesktopsStartup.
 --
---myStartupHook = return ()
+myStartupHook = setWMName "LG3D"
  
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
