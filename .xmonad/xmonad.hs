@@ -30,6 +30,8 @@ import           System.IO
 import           XMonad.Util.Run -- for spawnPipe and hPutstrLn
   
 -- Environment
+import System.Directory
+import System.IO.Unsafe
 import XMonad.Hooks.SetWMName
 
 -- | Programs used: dmenu, dzen2
@@ -142,9 +144,12 @@ extPrograms = M.fromList $
    , (".", \p -> spawn $ "emacsclient " ++ p)
    ]
 
+home :: FilePath
+home = unsafePerformIO getHomeDirectory
+  
 -- | Configuration for launcher
 launcherConfig = LauncherConfig { 
-  pathToHoogle = "/home/kmels/.cabal/bin/hoogle", 
+  pathToHoogle = home ++ "/.cabal/bin/hoogle", 
   browser = "conkeror" 
   }
 
@@ -426,4 +431,3 @@ myLayout = avoidStruts $ tiled ||| minimize (Tall 1 (3/100) (1/2)) ||| tiled |||
 myXmonadBar = "dzen2 -x '1440' -y '0' -h '24' -w '640' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
 myStatusBar = "conky -c /home/kmels/.xmonad/.conky_dzen | dzen2 -x '2080' -w '1040' -h '24' -ta 'r' -bg '#1B1D1E' -fg '#FFFFFF' -y '0'"
 myBitmapsDir = "/home/kmels/.xmonad/bitmaps"
-
