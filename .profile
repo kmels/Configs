@@ -30,8 +30,9 @@ if [ -d "$HOME/.cabal/bin" ] ; then
     PATH="$HOME/.cabal/bin:$PATH"
 fi
 
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
-export JDK_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
+#export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+#export JDK_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
 
 # fix ghc-7.8.2
 export LANG=C.UTF-8
@@ -43,12 +44,16 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # sbt size
-export SBT_OPTS="-Xmx6036M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=3556m -Xss2M  -Duser.timezone=America/Guatemala"
+export SBT_OPTS="-Xmx6036M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -Xss2M  -Duser.timezone=America/Guatemala"
 
 # Find binary folders, update PATH
-for folder in $(find $HOME/bin -name bin -type d); do    
+for folder in $(/usr/bin/find $HOME/bin -name bin -type d); do    
     if [ -d "$folder" ] ; then export PATH="$folder:$PATH"
     fi
 done
 
+# haskell platform 2014
+export PATH="$PATH:/usr/local/haskell/ghc-7.8.3-x86_64/bin/"
+export _JAVA_AWT_WM_NONREPARENTING=1 
 
+#alias update-java-version="sudo update-alternatives --config javac && sudo update-alternatives --config java"
