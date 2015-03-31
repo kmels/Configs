@@ -1,6 +1,6 @@
 import           XMonad
 import           System.Exit
-import           XMonad.Config.Gnome
+import           XMonad.Config.Mate
 import           XMonad.Util.Replace
 
 -- Data & Control
@@ -28,7 +28,10 @@ import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.ManageDocks
 import           System.IO
 import           XMonad.Util.Run -- for spawnPipe and hPutstrLn
-  
+
+-- Prompt
+import XMonad.Prompt.FuzzyMatch(fuzzyMatch, fuzzySort)
+
 -- Environment
 import System.Directory
 import System.IO.Unsafe
@@ -43,8 +46,7 @@ main = do
   dzenLeftBar <- spawnPipe myXmonadBar
   --dzenRightBar <- spawnPipe myStatusBar
   --(xmonad =<< dzen xConfig)
-  xmonad $ gnomeConfig{
-    terminal           = "gnome-terminal",
+  xmonad $ mateConfig {
     focusFollowsMouse  = False,
   
     ------------------------------
@@ -131,6 +133,8 @@ promptConfig =
         , showCompletionOnTab = True
         , searchPredicate   = isPrefixOf
         , alwaysHighlight   = True
+--        , searchPredicate   = fuzzyMatch
+--        , sorter            = fuzzySort
         }
 
 -- | Which program should open a file 
@@ -156,10 +160,12 @@ launcherConfig = LauncherConfig {
 -- | XMonad key bindings
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
-    [    
-      -- Xmonad.Actions.Launcher
+    [
+      --Mate run
+      ((modm, xK_r), mateRun), 
+      -- Launcher Prompt
       ((modm .|. controlMask, xK_x), launcherPrompt promptConfig $ defaultLauncherModes launcherConfig),
-      -- Xmonad.Prompt.Shell
+      -- Shell Prompt
       ((modm .|. controlMask, xK_c), shellPrompt promptConfig), 
       
       -- Spawn a terminal
@@ -259,6 +265,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm .|. shiftMask, xK_q     ), spawn "mate-session-save --logout-dialog")
     ]
     ++
  
@@ -331,7 +338,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll [
-  manageHook gnomeConfig
+  manageHook mateConfig
   , className =? "Clementine" --> doShift "music"
   , className =? "Xchat" --> doShift "talk"
   , className =? "Skype" --> doShift "talk"
@@ -378,7 +385,7 @@ myManageHook = composeAll [
 -- It will add initialization of EWMH support to your custom startup
 -- hook by combining it with ewmhDesktopsStartup.
 --
-myStartupHook = setWMName "LG3D"
+myStartupHook = startupHook mateConfig >> setWMName "LG3D"
  
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -391,7 +398,7 @@ searchEngineMap method = M.fromList $
        ]
 
 myGManageHook = composeAll (
-    [ manageHook gnomeConfig
+    [ manageHook mateConfig
     , className =? "Unity-2d-panel" --> doIgnore
     , className =? "Unity-2d-launcher" --> doFloat
     ])
