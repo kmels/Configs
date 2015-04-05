@@ -2,8 +2,8 @@
 ;utils 
 ;(Copyright © 2014 - Bozhidar Batsov)
 ;****************************************
-(defun sudo-edit (&optional arg)
-  "Edit currently visited file as root.
+(setq make-backup-files nil) ;; Don't create files with '#' appended at both ends
+(defun sudo-edit (&optional arg) "Edit currently visited file as root.
 
 With a prefix ARG prompt for a file to visit.
 Will also prompt for a file to visit if current
@@ -159,6 +159,7 @@ buffer is not visiting a file."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ensime-default-scala-version "2.11.2")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
@@ -311,3 +312,4 @@ buffer is not visiting a file."
 ;;; scala 
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
