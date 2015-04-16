@@ -1,6 +1,6 @@
 import           XMonad
 import           System.Exit
-import           XMonad.Config.Mate
+import           XMonad.Config.Gnome
 import           XMonad.Util.Replace
 
 -- Data & Control
@@ -29,9 +29,6 @@ import XMonad.Hooks.ManageDocks
 import           System.IO
 import           XMonad.Util.Run -- for spawnPipe and hPutstrLn
 
--- Prompt
-import XMonad.Prompt.FuzzyMatch(fuzzyMatch, fuzzySort)
-
 -- Environment
 import System.Directory
 import System.IO.Unsafe
@@ -46,7 +43,7 @@ main = do
   dzenLeftBar <- spawnPipe myXmonadBar
   --dzenRightBar <- spawnPipe myStatusBar
   --(xmonad =<< dzen xConfig)
-  xmonad $ mateConfig {
+  xmonad $ gnomeConfig {
     focusFollowsMouse  = False,
   
     ------------------------------
@@ -162,7 +159,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
     [
       --Mate run
-      ((modm, xK_r), mateRun), 
+--      ((modm, xK_r), mateRun), 
       -- Launcher Prompt
       ((modm .|. controlMask, xK_x), launcherPrompt promptConfig $ defaultLauncherModes launcherConfig),
       -- Shell Prompt
@@ -338,7 +335,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll [
-  manageHook mateConfig
+  manageHook gnomeConfig
   , className =? "Clementine" --> doShift "music"
   , className =? "Xchat" --> doShift "talk"
   , className =? "Skype" --> doShift "talk"
@@ -385,7 +382,7 @@ myManageHook = composeAll [
 -- It will add initialization of EWMH support to your custom startup
 -- hook by combining it with ewmhDesktopsStartup.
 --
-myStartupHook = startupHook mateConfig >> setWMName "LG3D"
+myStartupHook = startupHook gnomeConfig >> setWMName "LG3D"
  
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -398,7 +395,7 @@ searchEngineMap method = M.fromList $
        ]
 
 myGManageHook = composeAll (
-    [ manageHook mateConfig
+    [ manageHook gnomeConfig
     , className =? "Unity-2d-panel" --> doIgnore
     , className =? "Unity-2d-launcher" --> doFloat
     ])
