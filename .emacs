@@ -1,7 +1,15 @@
 ;****************************************
-;utils 
-;(Copyright © 2014 - Bozhidar Batsov)
+; key bindings
 ;****************************************
+
+; Cycle through windows
+(global-set-key (kbd "M-p") 'previous-multiframe-window)
+(global-set-key (kbd "M-n") 'next-multiframe-window)
+
+; Cycle through buffers
+(global-set-key (kbd "C-<left>")  'previous-buffer)
+(global-set-key (kbd "C-<right>") 'next-buffer)
+
 (setq make-backup-files nil) ;; Don't create files with '#' appended at both ends
 (defun sudo-edit (&optional arg) "Edit currently visited file as root.
 
@@ -20,8 +28,6 @@ buffer is not visiting a file."
 ; general 
 ; ****************************************
 (setenv "LANG" "C.UTF-8")
-(global-set-key "\M-n" 'next-buffer)
-(global-set-key "\M-p" 'previous-buffer)
 (global-set-key (kbd "<f2> RET") 'make-frame-command)
 
 ;navigation
