@@ -57,3 +57,5 @@ export PATH="$PATH:/usr/local/haskell/ghc-7.8.3-x86_64/bin/"
 export _JAVA_AWT_WM_NONREPARENTING=1 
 
 #alias update-java-version="sudo update-alternatives --config javac && sudo update-alternatives --config java"
+
+alias free-idea=ibus-daemon -rd
