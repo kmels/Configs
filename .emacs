@@ -54,13 +54,16 @@ buffer is not visiting a file."
 ;; ***************************************
 ;; color-theme (make emacs look better)
 ;; ****************************************
-(add-to-list 'load-path "~/.emacs.d/common/color-theme-6.6.0")
-(load "~/.emacs.d/color-theme-tomorrow-night.el")
-(require 'color-theme)
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (color-theme-kmels)))
+;(add-to-list 'load-path "~/.emacs.d/common/color-theme-6.6.0")
+;(load "~/.emacs.d/color-theme-tomorrow-night.el")
+;(require 'color-theme)
+;(eval-after-load "color-theme"
+;  '(progn
+;     (color-theme-initialize)
+;     (color-theme-kmels)))
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'zenburn t)
 
 ;; ****************************************
 ;; org-mode 
@@ -165,6 +168,7 @@ buffer is not visiting a file."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("f37d09076188b2e8d2a6847931deec17f640853aedd8ea4ef3ac57db01335008" default)))
  '(ensime-default-scala-version "2.11.2")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
