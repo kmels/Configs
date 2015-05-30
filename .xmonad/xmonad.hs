@@ -1,6 +1,6 @@
 import           XMonad
 import           System.Exit
-import           XMonad.Config.Gnome
+import           XMonad.Config.Mate
 import           XMonad.Util.Replace
 
 -- Data & Control
@@ -43,7 +43,8 @@ main = do
   dzenLeftBar <- spawnPipe myXmonadBar
   --dzenRightBar <- spawnPipe myStatusBar
   --(xmonad =<< dzen xConfig)
-  xmonad $ gnomeConfig {
+  xmonad $ mateConfig {
+    terminal = "gnome-terminal",
     focusFollowsMouse  = False,
   
     ------------------------------
@@ -169,7 +170,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf),
  
       -- Spawn dmenu
-      ((modm, xK_space), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\""), 
+      ((modm, xK_space), spawn "dmenu_run"), 
       
       -- Close window
       ((modm .|. shiftMask, xK_w     ), kill),
@@ -335,7 +336,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll [
-  manageHook gnomeConfig
+  manageHook mateConfig
   , className =? "Clementine" --> doShift "music"
   , className =? "Xchat" --> doShift "talk"
   , className =? "Skype" --> doShift "talk"
@@ -382,7 +383,7 @@ myManageHook = composeAll [
 -- It will add initialization of EWMH support to your custom startup
 -- hook by combining it with ewmhDesktopsStartup.
 --
-myStartupHook = startupHook gnomeConfig >> setWMName "LG3D"
+myStartupHook = startupHook mateConfig >> setWMName "LG3D"
  
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -395,8 +396,8 @@ searchEngineMap method = M.fromList $
        ]
 
 myGManageHook = composeAll (
-    [ manageHook gnomeConfig
-    , className =? "Unity-2d-panel" --> doIgnore
+    [ 
+      className =? "Unity-2d-panel" --> doIgnore
     , className =? "Unity-2d-launcher" --> doFloat
     ])
 
