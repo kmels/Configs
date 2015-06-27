@@ -1,0 +1,6 @@
+bac { 
+    product = "uname"
+    usuario = "uname"
+    pass    = "upass"
+    clave   = "upass"
+}
