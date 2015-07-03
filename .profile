@@ -30,6 +30,11 @@ if [ -d "$HOME/.cabal/bin" ] ; then
     PATH="$HOME/.cabal/bin:$PATH"
 fi
 
+# set PATH to export programs installed with stack
+if [ -d "$HOME/.stack/programs/x86_64-linux/ghc-7.8.4/bin" ] ; then
+    PATH="$HOME/.stack/programs/x86_64-linux/ghc-7.8.4/bin:$PATH"
+fi
+
 #export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
 #export JDK_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
@@ -58,4 +63,4 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 #alias update-java-version="sudo update-alternatives --config javac && sudo update-alternatives --config java"
 
-alias free-idea=ibus-daemon -rd
+#alias free-idea=ibus-daemon -rd
