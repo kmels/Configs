@@ -13,9 +13,9 @@
 (setq make-backup-files nil) ;; Don't create files with '#' appended at both ends
 (defun sudo-edit (&optional arg) "Edit currently visited file as root.
 
-With a prefix ARG prompt for a file to visit.
-Will also prompt for a file to visit if current
-buffer is not visiting a file."
+; With a prefix ARG prompt for a file to visit.
+; Will also prompt for a file to visit if current
+; buffer is not visiting a file."
   (interactive "P")
   (if (or arg (not buffer-file-name))
       (find-file (concat "/sudo:root@localhost:"
@@ -27,6 +27,7 @@ buffer is not visiting a file."
 ; ****************************************
 ; general 
 ; ****************************************
+(setq tramp-default-method "ssh")
 (setenv "LANG" "C.UTF-8")
 (global-set-key (kbd "<f2> RET") 'make-frame-command)
 
@@ -52,18 +53,8 @@ buffer is not visiting a file."
 (setq x-select-enable-clipboard t )
 
 ;; ***************************************
-;; color-theme (make emacs look better)
-;; ****************************************
-;(add-to-list 'load-path "~/.emacs.d/common/color-theme-6.6.0")
-;(load "~/.emacs.d/color-theme-tomorrow-night.el")
-;(require 'color-theme)
-;(eval-after-load "color-theme"
-;  '(progn
-;     (color-theme-initialize)
-;     (color-theme-kmels)))
-
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'zenburn t)
+;; theme
+(add-to-list 'load-path "~/.emacs.d/themes/cobalt-theme.el")
 
 ;; ****************************************
 ;; org-mode 
@@ -168,7 +159,7 @@ buffer is not visiting a file."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("f37d09076188b2e8d2a6847931deec17f640853aedd8ea4ef3ac57db01335008" default)))
+ '(custom-safe-themes (quote ("3df3f258afcd48be4da5b55fda0dda928a3f2497c7c0b47922719fa3acc5c041" "f37d09076188b2e8d2a6847931deec17f640853aedd8ea4ef3ac57db01335008" default)))
  '(ensime-default-scala-version "2.11.2")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
@@ -323,3 +314,10 @@ buffer is not visiting a file."
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
+; ESS (R) mode 
+;(require 'ess-site)
+;(add-to-list 'load-path "~/.emacs.d/statistics/ess-15.03-1/lisp/")
+;(load "ess-site")
+ 
+(require 'whitespace)
+(autoload 'whitespace-mode           "whitespace" "Toggle whitespace visualization."        t)
