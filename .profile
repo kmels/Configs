@@ -21,6 +21,15 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+# set PATH so it includes spark bin if it exists
+if [ -d "$HOME/bin/spark/bin" ] ; then
+    PATH="$HOME/bin/spark/bin:$PATH"
+fi
+
+# set PATH so it includes spark sbin if it exists
+if [ -d "$HOME/bin/spark/sbin" ] ; then
+    PATH="$HOME/bin/spark/sbin:$PATH"
+fi
 
 if [ -d "$HOME/Binarios" ] ; then PATH="$HOME/Binarios:$PATH" 
 fi
@@ -30,9 +39,18 @@ if [ -d "$HOME/.cabal/bin" ] ; then
     PATH="$HOME/.cabal/bin:$PATH"
 fi
 
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 # set PATH to export programs installed with stack
 if [ -d "$HOME/.stack/programs/x86_64-linux/ghc-7.8.4/bin" ] ; then
     PATH="$HOME/.stack/programs/x86_64-linux/ghc-7.8.4/bin:$PATH"
+fi
+
+# Kafka
+if [ -d "$HOME/bin/kafka_2.10-0.8.2.1/bin" ] ; then
+    PATH="$HOME/bin/kafka_2.10-0.8.2.1/bin:$PATH"
 fi
 
 #export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
@@ -64,3 +82,5 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 #alias update-java-version="sudo update-alternatives --config javac && sudo update-alternatives --config java"
 
 #alias free-idea=ibus-daemon -rd
+
+export SBT_OPTS="-Xmx3536M -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=2G -Xss4M  -Duser.timezone=GMT"
