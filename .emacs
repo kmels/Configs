@@ -52,9 +52,19 @@
 ; enable clipboard
 (setq x-select-enable-clipboard t )
 
-;; ***************************************
-;; theme
-(add-to-list 'load-path "~/.emacs.d/themes/cobalt-theme.el")
+; ***************************************
+; theme
+;; color-theme (make emacs look better)
+;; ****************************************
+(add-to-list 'load-path "~/.emacs.d/common/color-theme-6.6.0")
+(load-file "~/.emacs.d/themes/cobalt-theme.el")
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (color-theme-cobalt)))
+
+(require 'color-theme)
+
 
 ;; ****************************************
 ;; org-mode 
@@ -131,9 +141,8 @@
 ;****************************************
 ; MELPA (Milkypostman’s Emacs Lisp Package Archive)
 ;****************************************
-(require 'package)
 (add-to-list 'package-archives
-         '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (when (not package-archive-contents)
@@ -160,7 +169,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes (quote ("3df3f258afcd48be4da5b55fda0dda928a3f2497c7c0b47922719fa3acc5c041" "f37d09076188b2e8d2a6847931deec17f640853aedd8ea4ef3ac57db01335008" default)))
- '(ensime-default-scala-version "2.11.2")
+ '(ensime-default-scala-version "2.11.5")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
@@ -287,12 +296,6 @@
 ;----------------------------------------
 ; F#
 ;----------------------------------------
-;;; Initialize MELPA
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
-(unless package-archive-contents (package-refresh-contents))
-(package-initialize)
-
 ;;; Install fsharp-mode
 (unless (package-installed-p 'fsharp-mode)
   (package-install 'fsharp-mode))
@@ -302,16 +305,12 @@
 (setq inferior-fsharp-program "/home/campesino/bin/fsharp/lib/release/fsharpi --readline-")
 (setq fsharp-compiler "/home/campesino/bin/fsharp/lib/release/fsharpc")
 
-;; if you're new to the MELPA package manager, include this in your `~/.emacs` file to add it
-(require 'package)
-(add-to-list 'package-archives
-         '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
-
+(setenv "PATH" (concat "~/bin:" (getenv "PATH")))
 (when (not package-archive-contents)
   (package-refresh-contents))
 ;;; scala 
 (require 'ensime)
+
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 ; ESS (R) mode 
@@ -321,3 +320,22 @@
  
 (require 'whitespace)
 (autoload 'whitespace-mode           "whitespace" "Toggle whitespace visualization."        t)
+
+;; python autocomplete
+;;(load-file "~/.emacs.d/prog-lang/emacs-for-python/epy-init.el")
+
+;;(add-to-list 'load-path "path/to/emacs-for-python/") ;; tell where to load the various files
+
+;(require 'epy-setup)      ;; It will setup other loads, it is required!
+
+;(require 'epy-python)     ;; If you want the python facilities [optional]
+
+;(require 'epy-completion) ;; If you want the autocompletion settings [optional]
+
+;(require 'epy-editing)    ;; For configurations related to editing [optional]
+
+;(require 'epy-bindings)   ;; For my suggested keybindings [optional]
+
+;(require 'epy-nose)       ;; For nose integration
+
+(put 'erase-buffer 'disabled nil)
