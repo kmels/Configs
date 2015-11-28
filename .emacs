@@ -141,6 +141,7 @@
 ;****************************************
 ; MELPA (Milkypostman’s Emacs Lisp Package Archive)
 ;****************************************
+(require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (package-initialize)
@@ -155,8 +156,8 @@
 ;; Haskell: haskell-mode, ghc-mod, stylish-haskell
 ;; https://github.com/serras/emacs-haskell-tutorial/blob/master/tutorial.md 
 ;; --------------------------------------------------
-(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 (eval-after-load 'haskell-mode
@@ -339,3 +340,6 @@
 ;(require 'epy-nose)       ;; For nose integration
 
 (put 'erase-buffer 'disabled nil)
+
+(require 'iso-transl)
+
