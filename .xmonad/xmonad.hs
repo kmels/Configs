@@ -151,7 +151,7 @@ home = unsafePerformIO getHomeDirectory
   
 -- | Configuration for launcher
 launcherConfig = LauncherConfig { 
-  pathToHoogle = home ++ "/.cabal/bin/hoogle", 
+  pathToHoogle = "/usr/bin/hoogle", 
   browser = "conkeror" 
   }
 
@@ -227,7 +227,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm  , xK_apostrophe), spawn "scrot -e 'mv $f ~/Desktop' && nemo ~/Desktop" ) 
 
       -- favorite browser
-    , ((modm              , xK_c), spawn "/home/kmels/bin/conkeror")
+    , ((modm              , xK_c), spawn "/home/campesino/bin/conkeror")
       
       -- favorite editor
     , ((modm              , xK_e), spawn "emacs")
@@ -290,7 +290,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_bracketright, xK_backslash] [0..]
+        | (key, sc) <- zip [xK_backslash, xK_bracketright] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]    
 
 -- Non-numeric num pad keys, sorted by number 
