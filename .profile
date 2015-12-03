@@ -53,6 +53,11 @@ if [ -d "$HOME/bin/kafka_2.10-0.8.2.1/bin" ] ; then
     PATH="$HOME/bin/kafka_2.10-0.8.2.1/bin:$PATH"
 fi
 
+# Spark
+if [ -d "$HOME/spark/1.4.1-hadoop2.4/bin" ] ; then
+    PATH="$HOME/spark/1.4.1-hadoop2.4/bin:$PATH"
+fi
+
 #export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
 #export JDK_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
