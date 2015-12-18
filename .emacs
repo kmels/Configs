@@ -54,17 +54,8 @@
 
 ; ***************************************
 ; theme
-;; color-theme (make emacs look better)
 ;; ****************************************
-(add-to-list 'load-path "~/.emacs.d/common/color-theme-6.6.0")
-(load-file "~/.emacs.d/themes/cobalt-theme.el")
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (color-theme-cobalt)))
-
-(require 'color-theme)
-
+(load-file "~/.emacs.d/themes/cyberpunk-theme-20151215.953.el")
 
 ;; ****************************************
 ;; org-mode 
@@ -164,6 +155,12 @@
           '(define-key haskell-mode-map [f8] 'haskell-navigate-imports))
 (setenv "PATH" (concat "~/.cabal/bin:" (getenv "PATH")))
 (add-to-list 'exec-path "~/.cabal/bin")
+
+(let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
+  (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
+  (add-to-list 'exec-path my-cabal-path))
+(custom-set-variables '(haskell-tags-on-save t))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
