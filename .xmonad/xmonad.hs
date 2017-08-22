@@ -195,10 +195,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((modm .|. shiftMask , xK_Tab ), windows W.focusUp ),
       ((modm, xK_p ), windows W.focusUp ),
  
-      -- Minimize 
-      ((modm, xK_m ), withFocused minimizeWindow ),
-      ((modm .|. shiftMask, xK_m ), sendMessage RestoreNextMinimizedWin),
- 
       -- Swap the focused window and the master window
       ((modm, xK_Return), windows W.swapMaster), 
  
