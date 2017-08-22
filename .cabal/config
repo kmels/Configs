@@ -10,9 +10,9 @@
 -- Cabal library version: 1.22.5.0
 -- cabal-install version: 1.22.6.0
 
-
 -- require-sandbox: False
 -- ignore-sandbox: False
+
 remote-repo: hackage.haskell.org:http://hackage.haskell.org/packages/archive
 remote-repo-cache: /home/campesino/.cabal/packages
 -- local-repo:
@@ -22,6 +22,7 @@ world-file: /home/campesino/.cabal/world
 -- compiler: ghc
 -- with-compiler:
 -- with-hc-pkg:
+
 -- program-prefix: 
 -- program-suffix: 
 -- library-vanilla: True
@@ -37,11 +38,26 @@ world-file: /home/campesino/.cabal/world
 -- executable-stripping: True
 -- library-stripping: True
 -- configure-option:
+
+-- scratchdir:
+-- program-prefix: 
+-- program-suffix: 
+-- library-vanilla: True
+-- library-profiling: False
+-- shared: False
+-- executable-dynamic: False
+-- executable-profiling: False
+-- optimization: True
+-- library-for-ghci: True
+-- split-objs: False
+-- executable-stripping: True
+
 -- user-install: True
 -- package-db:
 -- flags:
 -- extra-include-dirs:
 -- extra-lib-dirs:
+
 extra-prog-path: /home/campesino/.cabal/bin
 -- instantiate-with:
 -- tests: False
@@ -50,10 +66,16 @@ extra-prog-path: /home/campesino/.cabal/bin
 -- exact-configuration: False
 -- benchmarks: False
 -- relocatable: False
+
+-- tests: False
+-- library-coverage: False
+-- benchmarks: False
+
 -- cabal-lib-version:
 -- constraint:
 -- preference:
 -- solver: choose
+
 -- allow-newer: False
 -- documentation: False
 -- doc-index-file: $datadir/doc/$arch-$os-$compiler/index.html
@@ -61,10 +83,18 @@ extra-prog-path: /home/campesino/.cabal/bin
 -- reorder-goals: False
 -- shadow-installed-packages: False
 -- strong-flags: False
+
+documentation: True
+-- doc-index-file: $datadir/doc/index.html
+-- max-backjumps: 200
+-- reorder-goals: False
+-- shadow-installed-packages:
+
 -- reinstall: False
 -- avoid-reinstalls: False
 -- force-reinstalls: False
 -- upgrade-dependencies: False
+-- only-dependencies: False
 -- root-cmd:
 -- symlink-bindir:
 build-summary: /home/campesino/.cabal/logs/build.log
@@ -92,6 +122,11 @@ haddock
   -- hscolour-css:
   -- contents-location:
 
+-- one-shot: False
+-- jobs:
+-- username:
+-- password:
+
 install-dirs user
   -- prefix: /home/campesino/.cabal
   -- bindir: $prefix/bin
@@ -104,6 +139,13 @@ install-dirs user
   -- htmldir: $docdir/html
   -- haddockdir: $htmldir
   -- sysconfdir: $prefix/etc
+  -- libsubdir: $pkgid/$compiler
+  -- libexecdir: $prefix/libexec
+  -- datadir: $prefix/share
+  -- datasubdir: $pkgid
+  -- docdir: $datadir/doc/$pkgid
+  -- htmldir: $docdir/html
+  -- haddockdir: $htmldir
 
 install-dirs global
   -- prefix: /usr/local
@@ -173,3 +215,11 @@ program-default-options
   -- strip-options:
   -- tar-options:
   -- uhc-options:
+  -- libsubdir: $pkgid/$compiler
+  -- libexecdir: $prefix/libexec
+  -- datadir: $prefix/share
+  -- datasubdir: $pkgid
+  -- docdir: $datadir/doc/$pkgid
+  -- htmldir: $docdir/html
+  -- haddockdir: $htmldir
+  

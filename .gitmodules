@@ -1,0 +1,15 @@
+[submodule "stack-exchange"]
+	path = .emacs.d/sx.el
+	url = git@github.com:vermiculus/sx.el.git
+[submodule "conkeror"]
+	path = bin/conkeror
+	url = git://repo.or.cz/conkeror.git
+[submodule "fsharp"]
+	path = bin/fsharp
+	url = git@github.com:fsharp/fsharp.git
+[submodule "fsharpbinding"]
+	path = .emacs.d/prog-lang/fsharpbinding
+	url = git@github.com:fsharp/fsharpbinding.git
+[submodule "bin/monodevelop"]
+	path = bin/monodevelop
+	url = git@github.com:mono/monodevelop.git

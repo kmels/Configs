@@ -1,0 +1,12 @@
+[general]
+#The terminal height (lines)
+def_term_height=5
+#The terminal default visibility in new windows? (1: Visible, 0: Hidden)
+def_visible=1
+#The terminal position (1: Top, 0: Bottom)
+#NOTE: it's not recommended to put the terminal on the bottom
+term_on_top=1
+
+[terminal]
+#The shell to use (Nautilus Terminal use the user's defined shell by default)
+shell=/bin/bash
