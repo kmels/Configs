@@ -44,7 +44,7 @@ main = do
   --dzenRightBar <- spawnPipe myStatusBar
   --(xmonad =<< dzen xConfig)
   xmonad $ mateConfig {
-    terminal = "gnome-terminal",
+    terminal = "mate-terminal",
     focusFollowsMouse  = False,
   
     ------------------------------
