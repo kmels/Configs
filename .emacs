@@ -159,22 +159,26 @@
 (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
   (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
   (add-to-list 'exec-path my-cabal-path))
-(custom-set-variables '(haskell-tags-on-save t))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (magit)))
- '(custom-safe-themes (quote ("3df3f258afcd48be4da5b55fda0dda928a3f2497c7c0b47922719fa3acc5c041" "f37d09076188b2e8d2a6847931deec17f640853aedd8ea4ef3ac57db01335008" default)))
+ '(custom-safe-themes
+   (quote
+    ("3df3f258afcd48be4da5b55fda0dda928a3f2497c7c0b47922719fa3acc5c041" "f37d09076188b2e8d2a6847931deec17f640853aedd8ea4ef3ac57db01335008" default)))
  '(ensime-default-scala-version "2.11.5")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
  '(haskell-process-type (quote cabal-repl))
  '(haskell-tags-on-save t)
- '(org-agenda-files (quote ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org"))))
+ '(org-agenda-files
+   (quote
+    ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org")))
+ '(package-selected-packages (quote (elixir-mode jsx-mode magit))))
+
+
 
 (eval-after-load 'haskell-mode '(progn
   (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
@@ -224,10 +228,10 @@
 ;      (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
 ;****************************************
-; Set 4 Space Indent http://stackoverflow.com/questions/69934/set-4-space-indent-in-emacs-in-text-mode
+; Set 2 Space Indent http://stackoverflow.com/questions/69934/set-4-space-indent-in-emacs-in-text-mode
 ;****************************************
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
+(setq-default tab-width 2)
 (setq indent-line-function 'insert-tab)
 
 ;****************************************
