@@ -14,7 +14,7 @@ import           XMonad.Actions.CycleWS
 import           XMonad.Actions.Launcher
 import           XMonad.Actions.Search
 import           XMonad.Prompt
-import           XMonad.Prompt.Shell
+import           XMonad.Prompt.Shell(shellPrompt, prompt, safePrompt)
 
 import qualified XMonad.Actions.Submap as SM
 import qualified XMonad.Actions.Search as S
@@ -120,7 +120,7 @@ promptConfig =
         , borderColor       = "gray3"
         , promptBorderWidth = 1
         , promptKeymap      = promptKeys
---        , completionKey     = xK_Tab
+        , completionKey     = (0,xK_Tab)
         , changeModeKey     = xK_grave
         , position          = Bottom
         , height            = 60
@@ -129,10 +129,12 @@ promptConfig =
         , defaultText       = []
         , autoComplete      = Nothing
         , showCompletionOnTab = True
+        , defaultPrompter   = id  
         , searchPredicate   = isPrefixOf
         , alwaysHighlight   = True
 --        , searchPredicate   = fuzzyMatch
 --        , sorter            = fuzzySort
+        , sorter                = const id  
         }
 
 -- | Which program should open a file 
@@ -165,7 +167,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((modm .|. controlMask, xK_x), launcherPrompt promptConfig $ defaultLauncherModes launcherConfig),
       -- Shell Prompt
       ((modm .|. controlMask, xK_c), shellPrompt promptConfig), 
-      
       -- Spawn a terminal
       ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf),
  
