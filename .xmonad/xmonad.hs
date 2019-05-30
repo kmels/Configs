@@ -177,16 +177,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((modm .|. shiftMask, xK_w     ), kill),
       
       -- Next layout
-      ((modm, xK_grave ), sendMessage NextLayout),
+      ((modm, xK_masculine ), sendMessage NextLayout),
       
       --  Reset the layouts on the current workspace to default
-      ((modm .|. shiftMask, xK_grave ), setLayout $ XMonad.layoutHook conf), 
+      ((modm .|. shiftMask, xK_masculine ), setLayout $ XMonad.layoutHook conf), 
       
       -- Resize viewed windows to the correct size
       ((modm, xK_j ), refresh),
         
       -- File Explorer
-      ((modm, xK_Up ), spawn "nautilus ~"),
+      ((modm, xK_Up ), spawn "dolphin ~"),
       
       -- Move focus to the next window
       ((modm, xK_Tab ), windows W.focusDown),      
