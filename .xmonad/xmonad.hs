@@ -1,6 +1,6 @@
 import           XMonad
+import           XMonad.Config.Kde  
 import           System.Exit
-import           XMonad.Config.Mate
 import           XMonad.Util.Replace
 
 -- Data & Control
@@ -43,8 +43,8 @@ main = do
   dzenLeftBar <- spawnPipe myXmonadBar
   --dzenRightBar <- spawnPipe myStatusBar
   --(xmonad =<< dzen xConfig)
-  xmonad $ mateConfig {
-    terminal = "mate-terminal",
+  xmonad $ kdeConfig {
+    terminal = "konsole",
     focusFollowsMouse  = False,
   
     ------------------------------
@@ -55,7 +55,7 @@ main = do
     --   mod4Mask  |  windows key |
     ------------------------------
   modMask            = mod4Mask,
-  workspaces         = ["1","bitpaga","dart-haskell","shell","5","6","translate","browser","9"],
+  workspaces         = ["1","2","3","shell","5","6","7","browser","music"],
   startupHook = myStartupHook,
   
   normalBorderColor  = "#242424",
@@ -332,7 +332,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll [
-  manageHook mateConfig
+  manageHook kdeConfig
   , className =? "Clementine" --> doShift "music"
   , className =? "Xchat" --> doShift "talk"
   , className =? "Skype" --> doShift "talk"
@@ -379,7 +379,7 @@ myManageHook = composeAll [
 -- It will add initialization of EWMH support to your custom startup
 -- hook by combining it with ewmhDesktopsStartup.
 --
-myStartupHook = startupHook mateConfig >> setWMName "LG3D"
+myStartupHook = startupHook kdeConfig >> setWMName "LG3D"
  
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

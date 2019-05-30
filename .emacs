@@ -176,7 +176,7 @@
  '(org-agenda-files
    (quote
     ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org")))
- '(package-selected-packages (quote (elixir-mode jsx-mode magit))))
+ '(package-selected-packages (quote (fsharp-mode elixir-mode jsx-mode magit))))
 
 
 
