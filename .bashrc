@@ -11,6 +11,14 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
+
+for software in $HOME/bin/src/*; do
+   if ! [[ "$PATH" =~ "$software" ]]
+then
+    PATH="$software/bin:$PATH"
+fi
+done
+
 export PATH
 
 # If not running interactively, don't do anything

@@ -177,10 +177,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((modm .|. shiftMask, xK_w     ), kill),
       
       -- Next layout
-      ((modm, xK_masculine ), sendMessage NextLayout),
+      ((modm, xK_grave ), sendMessage NextLayout),
       
       --  Reset the layouts on the current workspace to default
-      ((modm .|. shiftMask, xK_masculine ), setLayout $ XMonad.layoutHook conf), 
+      ((modm .|. shiftMask, xK_grave ), setLayout $ XMonad.layoutHook conf), 
       
       -- Resize viewed windows to the correct size
       ((modm, xK_j ), refresh),
@@ -212,7 +212,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_l     ), sendMessage Expand)
  
     -- Push window back into tiling
-    , ((modm,               xK_a     ), withFocused $ windows . W.sink)
+    , ((modm,               xK_t     ), withFocused $ windows . W.sink)
  
     -- Increment the number of windows in the master area
     , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
@@ -287,7 +287,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_backslash, xK_bracketright] [0..]
+        | (key, sc) <- zip [xK_a, xK_d] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]    
 
 -- Non-numeric num pad keys, sorted by number 
