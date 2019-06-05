@@ -12,6 +12,11 @@ then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
+if ! [[ "$PATH" =~ "$HOME/node_modules/.bin:$HOME:" ]]
+then
+    PATH="$HOME/node_modules/.bin:$PATH"
+fi
+
 for software in $HOME/bin/src/*; do
    if ! [[ "$PATH" =~ "$software" ]]
 then
@@ -114,7 +119,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#export JAVA_HOME=~/bin/src/jdk1.8.0_144/
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
