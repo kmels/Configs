@@ -10,7 +10,11 @@
 (global-set-key (kbd "C-<left>")  'previous-buffer)
 (global-set-key (kbd "C-<right>") 'next-buffer)
 
-(setq make-backup-files nil) ;; Don't create files with '#' appended at both ends
+;;(setq make-backup-files nil) ;; Don't create files with '#' appended at both ends
+;;(setq auto-save-default nil) ;; Stop creating autosave files
+;;(setq create-lockfiles nil) ;; Stop creatng .#lock files
+(setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
+
 (defun sudo-edit (&optional arg) "Edit currently visited file as root.
 
 ; With a prefix ARG prompt for a file to visit.
@@ -165,8 +169,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("3df3f258afcd48be4da5b55fda0dda928a3f2497c7c0b47922719fa3acc5c041" "f37d09076188b2e8d2a6847931deec17f640853aedd8ea4ef3ac57db01335008" default)))
+        (quote
+         ("3df3f258afcd48be4da5b55fda0dda928a3f2497c7c0b47922719fa3acc5c041" "f37d09076188b2e8d2a6847931deec17f640853aedd8ea4ef3ac57db01335008" default)))
  '(ensime-default-scala-version "2.11.5")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
@@ -174,9 +178,11 @@
  '(haskell-process-type (quote cabal-repl))
  '(haskell-tags-on-save t)
  '(org-agenda-files
-   (quote
-    ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org")))
- '(package-selected-packages (quote (fsharp-mode elixir-mode jsx-mode magit))))
+        (quote
+         ("~/Dropbox/org/rezepte.org" "~/code/tautologer/doc/reduced-sentences-list.org" "~/Dropbox/org/dudas-aleman.org" "~/Dropbox/org/comprar.org" "~/Dropbox/org/kmels.org")))
+ '(package-selected-packages
+        (quote
+         (company-solidity solidity-flycheck solidity-mode ensime fsharp-mode elixir-mode jsx-mode magit))))
 
 
 
@@ -231,7 +237,7 @@
 ; Set 2 Space Indent http://stackoverflow.com/questions/69934/set-4-space-indent-in-emacs-in-text-mode
 ;****************************************
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
+(setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 
 ;****************************************
@@ -295,24 +301,8 @@
 ;(add-to-list 'load-path "~/.emacs.d/sx.el")
 ;(require 'sx-load)
 
-
-;----------------------------------------
-; F#
-;----------------------------------------
-;;; Install fsharp-mode
-(unless (package-installed-p 'fsharp-mode)
-  (package-install 'fsharp-mode))
-
-(require 'fsharp-mode)
-
-(setq inferior-fsharp-program "/home/campesino/bin/fsharp/lib/release/fsharpi --readline-")
-(setq fsharp-compiler "/home/campesino/bin/fsharp/lib/release/fsharpc")
-
-(setenv "PATH" (concat "~/bin:" (getenv "PATH")))
-(when (not package-archive-contents)
-  (package-refresh-contents))
 ;;; scala 
-;(require 'ensime)
+(require 'ensime)
 
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
@@ -346,3 +336,5 @@
 (require 'iso-transl)
 
 
+(require 'solidity-mode)
+(require 'company-solidity)
