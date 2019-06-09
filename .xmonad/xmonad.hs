@@ -55,7 +55,6 @@ main = do
     --   mod4Mask  |  windows key |
     ------------------------------
   modMask            = mod4Mask,
-  workspaces         = ["1","2","3","shell","5","6","7","browser","music"],
   startupHook = myStartupHook,
   
   normalBorderColor  = "#242424",
@@ -220,15 +219,18 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
         
-      -- Take screenshot and open its folder right away 
-    , ((modm  , xK_apostrophe), spawn "scrot -e 'mv $f ~/Desktop' && nemo ~/Desktop" ) 
+    -- Take screenshot and open
+    , ((modm,               xK_p), spawn "sleep 0.5 ; scrot -e 'xdg-open $f'" )
+
+    -- Take screenshot and open selection
+    , ((modm,               xK_apostrophe), spawn "sleep 0.5 ; scrot -s -e 'xdg-open $f'" )
 
       -- favorite browser
     , ((modm              , xK_c), spawn "/home/campesino/bin/conkeror")
       
       -- favorite editor
     , ((modm              , xK_e), spawn "emacs")
-            
+
       --Search
     , ((modm, xK_s), SM.submap $ searchEngineMap $ S.promptSearch promptConfig) 
     , ((modm .|. shiftMask, xK_s), SM.submap $ searchEngineMap $ S.selectSearch)
