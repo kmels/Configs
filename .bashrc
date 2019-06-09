@@ -26,6 +26,9 @@ done
 
 export PATH
 
+# Export PATH through sudo
+alias sudo='sudo env PATH=$PATH $@'
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
