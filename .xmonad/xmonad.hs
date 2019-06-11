@@ -220,7 +220,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
         
     -- Take screenshot and open
-    , ((modm,               xK_p), spawn "sleep 0.5 ; scrot -e 'xdg-open $f'" )
+    , ((modm .|. shiftMask, xK_p), spawn "sleep 0.5 ; scrot -e 'xdg-open $f'" )
 
     -- Take screenshot and open selection
     , ((modm,               xK_apostrophe), spawn "sleep 0.5 ; scrot -s -e 'xdg-open $f'" )
@@ -335,13 +335,8 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll [
-  manageHook kdeConfig
-  , className =? "Clementine" --> doShift "music"
-  , className =? "Xchat" --> doShift "talk"
-  , className =? "Skype" --> doShift "talk"
-  , className =? "Unity-2d-panel" --> doIgnore
-  , className =? "Unity-2d-shell" --> doFloat
-  , className =? "Unity-2d-launcher" --> doFloat
+  manageHook kde4Config
+  , className =? "plasmashell" --> doFloat
   ]
                
 --myManageHook = composeOne [
