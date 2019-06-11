@@ -24,6 +24,13 @@ then
 fi
 done
 
+for installed in /opt/*; do
+   if ! [[ "$PATH" =~ "$installed" ]]
+then
+    PATH="$installed/bin:$PATH"
+fi
+done
+
 export PATH
 
 # Export PATH through sudo
