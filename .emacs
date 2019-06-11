@@ -15,6 +15,11 @@
 ;;(setq create-lockfiles nil) ;; Stop creatng .#lock files
 (setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
 
+;; Full screen emacs
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+
 (defun sudo-edit (&optional arg) "Edit currently visited file as root.
 
 ; With a prefix ARG prompt for a file to visit.
