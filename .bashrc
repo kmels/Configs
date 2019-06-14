@@ -129,6 +129,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export EDITOR=emacs
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0
 alias javac=/usr/lib/jvm/java-1.8.0/bin/javac
 alias java=/usr/lib/jvm/java-1.8.0/bin/java
@@ -138,3 +139,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 PROMPT_COMMAND='echo -ne "\033]0;$(basename ${PWD})\007"'
+
