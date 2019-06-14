@@ -130,6 +130,8 @@ if ! shopt -oq posix; then
 fi
 
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0
+alias javac=/usr/lib/jvm/java-1.8.0/bin/javac
+alias java=/usr/lib/jvm/java-1.8.0/bin/java
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
