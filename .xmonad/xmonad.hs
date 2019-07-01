@@ -1,5 +1,5 @@
 import           XMonad
-import           XMonad.Config.Kde  
+import           XMonad.Config.Mate
 import           System.Exit
 import           XMonad.Util.Replace
 
@@ -43,8 +43,8 @@ main = do
   dzenLeftBar <- spawnPipe myXmonadBar
   --dzenRightBar <- spawnPipe myStatusBar
   --(xmonad =<< dzen xConfig)
-  xmonad $ kdeConfig {
-    terminal = "konsole",
+  xmonad $ mateConfig {
+    terminal = "mate-terminal",
     focusFollowsMouse  = False,
   
     ------------------------------
@@ -128,12 +128,12 @@ promptConfig =
         , defaultText       = []
         , autoComplete      = Nothing
         , showCompletionOnTab = True
-        , defaultPrompter   = id  
+--        , defaultPrompter   = id  
         , searchPredicate   = isPrefixOf
         , alwaysHighlight   = True
 --        , searchPredicate   = fuzzyMatch
 --        , sorter            = fuzzySort
-        , sorter                = const id  
+--        , sorter                = const id  
         }
 
 -- | Which program should open a file 
@@ -185,7 +185,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((modm, xK_j ), refresh),
         
       -- File Explorer
-      ((modm, xK_Up ), spawn "dolphin ~"),
+      ((modm, xK_Up ), spawn "caja ~"),
       
       -- Move focus to the next window
       ((modm, xK_Tab ), windows W.focusDown),      
@@ -335,16 +335,10 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll [
-  manageHook kde4Config
+  manageHook mateConfig
   , className =? "plasmashell" --> doFloat
   ]
-               
---myManageHook = composeOne [
-  --isKDETrayWindow -?> doIgnore,
-  --transience,
-  --isFullscreen -?> doFullFloat,
-  --resource =? "stalonetray" -?> doIgnore  
---  ]
+
 ------------------------------------------------------------------------
 -- Event handling
  
@@ -377,7 +371,7 @@ myManageHook = composeAll [
 -- It will add initialization of EWMH support to your custom startup
 -- hook by combining it with ewmhDesktopsStartup.
 --
-myStartupHook = startupHook kdeConfig >> setWMName "LG3D"
+myStartupHook = startupHook mateConfig >> setWMName "LG3D"
  
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
