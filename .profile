@@ -25,3 +25,8 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+# set PATH so it includes cabal's bin
+if [ -d "$HOME/.cabal/bin" ] ; then
+    PATH="$HOME/.cabal/bin:$PATH"
+fi
