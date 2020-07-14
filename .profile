@@ -30,3 +30,6 @@ fi
 if [ -d "$HOME/.cabal/bin" ] ; then
     PATH="$HOME/.cabal/bin:$PATH"
 fi
+
+SPARK_HOME="$HOME/bin/src/spark-2.4.6-bin-without-hadoop"
+PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
