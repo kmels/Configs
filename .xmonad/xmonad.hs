@@ -182,8 +182,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       
       -- Next layout
       ((modm, xK_grave ), sendMessage NextLayout),
+      ((modm, xK_Escape ), sendMessage NextLayout),
+      ((modm .|. shiftMask, xK_n ), sendMessage NextLayout),      
       
-      --  Reset the layouts on the current workspace to default
+      --  reset the layouts on the current workspace to default
       ((modm .|. shiftMask, xK_grave ), setLayout $ XMonad.layoutHook conf), 
       
       -- Resize viewed windows to the correct size
@@ -218,9 +220,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- Swap the focused window with the next window
      , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  ) 
     -- Shrink the master area
-    , ((modm,               xK_h     ), sendMessage Shrink)
+    , ((modm,               xK_h     ), sendMessage Expand)
     -- Expand the master area
-    , ((modm .|. shiftMask, xK_h     ), sendMessage Expand)
+    , ((modm .|. shiftMask, xK_h     ), sendMessage Shrink)
     
     -- , ((modm,               xK_l     ), sendMessage Expand)
  
