@@ -55,7 +55,7 @@ main = do
     --   mod4Mask  |  windows key |
     ------------------------------
   modMask            = mod1Mask,
-  workspaces         = ["1","bitpaga","dart-haskell","shell","5","6","translate","browser","9"],
+  workspaces         = ["1","2","3","4","5","6","7","8","9"],
   startupHook = myStartupHook,
   
   normalBorderColor  = "#242424",
@@ -353,20 +353,24 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll [
-  manageHook kdeConfig
-  , className =? "Clementine" --> doShift "music"
-  , className =? "Xchat" --> doShift "talk"
-  , className =? "Skype" --> doShift "talk"
-  , className =? "Plasma" --> doFloat
-  ]
-               
---myManageHook = composeOne [
-  --isKDETrayWindow -?> doIgnore,
-  --transience,
-  --isFullscreen -?> doFullFloat,
-  --resource =? "stalonetray" -?> doIgnore  
---  ]
+myManageHook = composeAll . concat $
+    [ [ className   =? c --> doFloat           | c <- myFloats]
+    , [ title       =? t --> doFloat           | t <- myOtherFloats]
+    , [ title       =? "Desktop — Plasma" --> doShift "9" ]
+    -- , className =? "Clementine" --> doShift "music"
+    -- , className =? "Xchat" --> doShift "talk"
+    -- , className =? "Skype" --> doShift "talk"
+    -- , title     =? "Plasma" --> doFloat
+    , [ className   =? c --> doF (W.shift "2") | c <- webApps]
+    , [ className   =? c --> doF (W.shift "9") | c <- myOtherWebApps]    
+    , [ className   =? c --> doF (W.shift "3") | c <- ircApps]
+    ]
+  where myFloats      = ["Plasma"]
+        myOtherFloats = ["Plasma"]
+        webApps       = ["Brave"] -- open on desktop 2
+        myOtherWebApps= ["Firefox", "Brave"] -- open on desktop 9
+        ircApps       = ["Ksirc"]
+
 ------------------------------------------------------------------------
 -- Event handling
  
