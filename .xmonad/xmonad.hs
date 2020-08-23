@@ -358,9 +358,7 @@ myManageHook = composeAll [
   , className =? "Clementine" --> doShift "music"
   , className =? "Xchat" --> doShift "talk"
   , className =? "Skype" --> doShift "talk"
-  , className =? "Unity-2d-panel" --> doIgnore
-  , className =? "Unity-2d-shell" --> doFloat
-  , className =? "Unity-2d-launcher" --> doFloat
+  , className =? "Plasma" --> doFloat
   ]
                
 --myManageHook = composeOne [
