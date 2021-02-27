@@ -35,3 +35,24 @@
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
+
+;;;
+
+;; packages
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  )
+
+(add-hook 'emacs-startup-hook
+	  (lambda ()
+    (find-file "~/lab/DECADA/README.org")
+    (org-mode t)
+    ))
+
+(add-hook 'after-change-major-mode-hook
+	  (lambda ()
+	    (wakatime-mode)
+	    ))
+
